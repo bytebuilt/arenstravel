@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arens Travel – Bileta autobusi nga Tirana për Maqedoni, Gjermani, Itali, Çeki dhe më shumë</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f8fb; --ink:#0f1c2b; --card:#fff; --line:#d5e0ea; --mute:#5a6b7c;
+  --red:#f2493b; --sun:#ffd23f; --sky:#cfe6fb; --navy:#163b5c; --board:#0f1c2b;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a141f; --ink:#eef3f8; --card:#13222f; --line:#243645;
+    --mute:#9db0c0; --sky:#17304a; --board:#050c13;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a141f; --ink:#eef3f8; --card:#13222f; --line:#243645;
+  --mute:#9db0c0; --sky:#17304a; --board:#050c13;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 "DM Sans",system-ui,sans-serif;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,h3,.f{font-family:"Bricolage Grotesque","DM Sans",sans-serif;letter-spacing:-.025em;margin:0}
+a{color:inherit}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+/* HEADER */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;font:800 22px "Bricolage Grotesque",sans-serif}
+.top a.t{font-weight:700;text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:2px}
+
+/* HERO */
+.hero{padding:30px 0 70px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+h1{font-size:clamp(44px,6.4vw,84px);font-weight:800;line-height:.98}
+h1 em{font-style:normal;background:var(--sun);color:#0f1c2b;padding:0 .12em;border-radius:8px;white-space:nowrap}
+.lead{font-size:20px;color:var(--mute);max-width:42ch;margin:24px 0 0}
+
+/* TICKET */
+.tk{display:grid;grid-template-columns:150px 1fr;background:var(--card);border-radius:22px;
+  box-shadow:0 22px 50px -18px rgba(15,28,43,.35);border:1px solid var(--line);position:relative}
+.stub{background:var(--navy);color:#fff;border-radius:22px 0 0 22px;padding:22px 16px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+  text-align:center;border-right:3px dashed var(--bg)}
+.stub b{font:800 20px "Bricolage Grotesque",sans-serif;line-height:1.1}
+.stub span{font-size:12px;color:#b4cbe0}
+.tk::before,.tk::after{content:"";position:absolute;left:131px;width:34px;height:34px;border-radius:50%;background:var(--bg);z-index:2}
+.tk::before{top:-17px}
+.tk::after{bottom:-17px}
+.body{padding:24px 26px}
+.body h2{font-size:24px;margin-bottom:16px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg .full{grid-column:1/-1}
+label{display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--mute)}
+select,input[type=number],input[type=search]{
+  width:100%;padding:12px;border-radius:10px;border:2px solid var(--line);
+  background:var(--bg);color:var(--ink);font:500 16px "DM Sans",sans-serif
+}
+/* Fusha statike e nisjes */
+.from-static{
+  display:flex;align-items:center;gap:10px;
+  padding:12px;border-radius:10px;border:2px dashed var(--line);
+  background:var(--bg);font:700 16px "DM Sans",sans-serif;color:var(--ink);
+}
+.from-static .pin{font-size:20px}
+.from-static .badge{
+  margin-left:auto;font:700 11px "DM Sans",sans-serif;
+  background:var(--sun);color:#0f1c2b;padding:3px 9px;border-radius:999px;letter-spacing:.02em;
+}
+.tot{display:flex;justify-content:space-between;align-items:end;margin:18px 0 14px;
+  padding-top:14px;border-top:2px dashed var(--line)}
+.tot span{font-size:14px;color:var(--mute)}
+.tot b{font:800 46px/1 "Bricolage Grotesque",sans-serif}
+.btn{display:block;text-align:center;background:var(--red);color:#fff;font-weight:700;
+  padding:14px;border-radius:12px;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.small{font-size:13px;color:var(--mute);margin:10px 0 0}
+
+/* SECTIONS */
+section{padding:64px 0}
+h2.s{font-size:clamp(30px,4.2vw,48px);font-weight:800;margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 30px;max-width:56ch}
+
+/* DEPARTURE BOARD */
+.board{background:var(--board);color:#fff;border-radius:22px;padding:8px 26px;
+  box-shadow:0 18px 40px -20px rgba(0,0,0,.5)}
+.bh,.br{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.bh{font-size:12px;color:#8fa6bb;font-weight:700}
+.br:last-child{border:0}
+.br b{font:700 28px "Bricolage Grotesque",sans-serif;color:var(--sun);font-variant-numeric:tabular-nums}
+.br .c{font-weight:700;font-size:19px}
+.br small{color:#8fa6bb;font-size:14px;margin-left:8px}
+.ok{color:#6fe3a0;font-size:13px;font-weight:700}
+
+/* DESTINATION LIST */
+.dl{border-top:3px solid var(--ink)}
+.dr{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;
+  padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.dr:hover{background:var(--sky)}
+.dr .fl{font-size:38px}
+.dr h3{font-size:26px}
+.dr p{margin:0;color:var(--mute);font-size:15px}
+.dr .pr{text-align:right;color:var(--mute);font-size:14px}
+.dr .pr b{display:block;font:800 34px "Bricolage Grotesque",sans-serif;color:var(--ink)}
+
+/* TABS + TABLE */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{border:2px solid var(--ink);background:transparent;color:var(--ink);padding:8px 16px;
+  border-radius:999px;font:700 15px "DM Sans",sans-serif;cursor:pointer}
+.tab[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.tw{overflow-x:auto;background:var(--card);border-radius:18px;border:1px solid var(--line);margin-top:14px}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:13px;color:var(--mute)}
+tr:last-child td{border:0}
+td.p{font:700 20px "Bricolage Grotesque",sans-serif;white-space:nowrap}
+.cs{color:var(--mute);font-size:15px}
+.note{font-size:14px;color:var(--mute);margin-top:12px}
+.empty{padding:24px;text-align:center;color:var(--mute)}
+
+/* WEEK GRID */
+.wk{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow-x:auto}
+.wr{display:grid;grid-template-columns:minmax(150px,1.6fr) repeat(7,minmax(40px,1fr));
+  align-items:center;min-width:600px;padding:14px 20px;border-bottom:1px solid var(--line);gap:4px}
+.wr:last-child{border:0}
+.wr.h{font-size:13px;font-weight:700;color:var(--mute)}
+.wr .n{font-weight:700}
+.wr .n small{display:block;font-weight:400;color:var(--mute);font-size:13px}
+.dot{justify-self:center;width:22px;height:22px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--red)}
+.hak{display:flex;gap:16px;align-items:center;margin-top:22px;font-weight:700}
+.hak i{font-style:normal;background:var(--sun);color:#0f1c2b;padding:6px 14px;border-radius:8px;
+  font:800 18px "Bricolage Grotesque",sans-serif}
+
+/* CONTACT */
+.ct{background:var(--navy);color:#fff;border-radius:28px;padding:48px;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+.ct h2{font-size:clamp(32px,4.6vw,56px);font-weight:800;line-height:1}
+.ct p{color:#bcd0e2}
+.ct a.n{display:block;font:800 clamp(24px,3.2vw,34px) "Bricolage Grotesque",sans-serif;
+  text-decoration:none;margin-bottom:6px}
+.ct small{color:#9fb8cf;display:block;margin-top:14px}
+footer{padding:30px 0 40px;color:var(--mute);font-size:14px;display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero,.ct{grid-template-columns:1fr}
+  .tk{grid-template-columns:1fr}
+  .stub{flex-direction:row;border-radius:22px 22px 0 0;border-right:0;
+    border-bottom:3px dashed var(--bg);padding:14px 20px}
+  .tk::before,.tk::after{top:auto;bottom:auto;left:-17px;top:calc(62px - 17px)}
+  .tk::after{left:auto;right:-17px}
+  .ct{padding:30px 24px}
+  .dr{grid-template-columns:48px 1fr auto;gap:12px}
+  .dr h3{font-size:21px}
+  .board{padding:6px 18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="w">
+
+  <div class="top">
+    <a class="logo" href="#">
+      <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" fill="#163b5c" stroke="#fff" stroke-width="3"/>
+        <path d="M30 72 L50 24 L70 72 M38 56 H62" fill="none" stroke="#fff" stroke-width="7"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 78 Q50 60 82 34" fill="none" stroke="#ffd23f" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Arens Travel
+    </a>
+    <a class="t" href="#kontakt">Kontakt</a>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Nga <em>Tirana</em> deri në Evropë, me autobus.</h1>
+      <p class="lead">Linja të rregullta nga Tirana drejt Maqedonisë së Veriut, Gjermanisë, Çekisë,
+        Sllovenisë, Kroacisë dhe Italisë. Magjia e udhëtimit.</p>
+      <div class="hak"><i>HAK BUS</i>partner zyrtar</div>
+    </div>
+
+    <div class="tk">
+      <div class="stub">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#ffd23f" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="12" rx="2"/>
+          <path d="M3 11h18M7 19v-3M17 19v-3"/>
+        </svg>
+        <b>Bileta<br>jote</b>
+        <span>Çmim orientues</span>
+      </div>
+      <div class="body">
+        <h2>Llogarit biletën</h2>
+        <div class="fg">
+
+          <!-- NISJA STATIKE – vetëm Tirana -->
+          <div class="full">
+            <label>Nisja</label>
+            <div class="from-static" aria-label="Nisja: Tiranë">
+              <span class="pin">📍</span>
+              <span>Tiranë</span>
+              <span class="badge">FIKSE</span>
+            </div>
+          </div>
+
+          <label class="full">Destinacioni<select id="cd"></select></label>
+          <label class="full">Lloji i biletës
+            <select id="ct">
+              <option value="ow">Vetëm vajtje (OW)</option>
+              <option value="rt">Vajtje-ardhje (RT)</option>
+            </select>
+          </label>
+          <label>Të rritur<input type="number" id="ca" min="0" max="20" value="1"></label>
+          <label>Fëmijë (deri 10 vjeç)<input type="number" id="cc" min="0" max="20" value="0"></label>
+        </div>
+        <div class="tot"><span>Total</span><b id="cT">0€</b></div>
+        <a class="btn" id="cw" href="https://wa.me/355693799888">Rezervo në WhatsApp</a>
+        <p class="small">Datën dhe çmimin final i konfirmojmë me ty.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="s">Orari i nisjes</h2>
+    <p class="sub">Të gjitha nisjet bëhen nga Tirana. Autobusi kalon nga këto qytete gjatë rrugës.</p>
+    <div class="board">
+      <div class="bh"><span>ORA</span><span>QYTETI</span><span></span></div>
+      <div id="sched"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s">Ku udhëtojmë</h2>
+    <p class="sub">Zgjidh shtetin për të parë çmimet e plota. Nisja: Tiranë.</p>
+    <div class="dl" id="dl"></div>
+  </section>
+
+  <section id="cmimet">
+    <h2 class="s">Çmimet</h2>
+    <p class="sub">Në euro. Kërko qytetin ose filtro sipas shtetit.</p>
+    <div class="tabs" id="tabs"></div>
+    <div style="max-width:420px">
+      <input type="search" id="q" placeholder="Kërko qytetin, p.sh. Milano" aria-label="Kërko qytetin">
+    </div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Destinacioni</th><th>Vajtje (OW)</th><th>Vajtje-ardhje (RT)</th>
+            <th>Fëmijë OW</th><th>Fëmijë RT</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="none" hidden>Nuk u gjet asnjë qytet. Na shkruaj dhe të ndihmojmë.</div>
+    </div>
+    <p class="note">Fëmijët deri në 10 vjeç paguajnë çmim të reduktuar. Çmimet e Italisë janë përditësimi më i fundit.</p>
+  </section>
+
+  <section>
+    <h2 class="s">Kur niset autobusi</h2>
+    <p class="sub">Pika e kuqe do të thotë se ka nisje atë ditë.</p>
+    <div class="wk" id="wk"></div>
+  </section>
+
+  <section id="kontakt">
+    <div class="ct">
+      <div>
+        <h2>Rezervo vendin tënd sot.</h2>
+        <p>Na telefono ose na shkruaj në WhatsApp. Zyra jonë ndodhet në Strugë, Maqedoni e Veriut.</p>
+      </div>
+      <div>
+        <a class="n" href="https://wa.me/355693799888">WhatsApp +355 69 37 99 888</a>
+        <a class="n" href="tel:+355693799888">+355 69 37 99 888</a>
+        <a class="n" href="tel:+355695466002">+355 69 54 66 002</a>
+        <small>info@metrohotelterminal.com</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© Arens Travel</span>
+    <span>Magjia e Udhëtimit · Partner zyrtar HAK BUS</span>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   DESTINACIONET – Maqedonia e Veriut e para, pastaj Gjermania,
+   Çeki, Slloveni & Kroaci, Itali.
+   Struktura e çdo rreshti: [emri, OW, RT, CHD OW, CHD RT]
+   ============================================================ */
+const G=[
+  {k:"mk",n:"🇲🇰 Maqedoni e Veriut",r:[
+    ["Strugë",15,20,15,20],
+    ["Kërçovë",15,24,15,24],
+    ["Gostivar",15,25,15,25],
+    ["Tetovë",15,25,15,25],
+    ["Shkup",20,30,20,30]]},
+
+  {k:"de",n:"🇩🇪 Gjermani",r:[
+    ["Mynih, Augsburg, Ulm",100,180,70,130],
+    ["Shtutgart, Karlsrue, Manhaim, Frankfurt, Bon, Këln, Leverkusen, Dizeldorf, Duisburg, Esen, Bohum, Dortmund",120,220,80,150],
+    ["Dresden, Berlin",100,180,50,100],
+    ["Hamburg",120,220,70,120]]},
+
+  {k:"cz",n:"🇨🇿 Çeki",r:[
+    ["Brno, Pragë, Teplice",100,180,50,100]]},
+
+  {k:"si",n:"🇸🇮 Slloveni & 🇭🇷 Kroaci",r:[
+    ["Lubjanë, Zagreb, Koper",40,80,40,80],
+    ["Monfalkone, Cesalto, Gonars, Frata, Vidor, Pente, Mestre",80,150,60,100]]},
+
+  {k:"it",n:"🇮🇹 Itali",r:[
+    ["Bollonja, Forli, Cesena",90,160,60,100],
+    ["Pesaro, Fano, Faenza, Rimini",100,180,60,100],
+    ["Ankona, Jesi, Civitanova, Askoli Piceno, Teramo, L'Aquila",110,200,70,120],
+    ["Avezano, Roma",120,220,70,120],
+    ["Terst, Portuguaro, Mestre, Trevizo, Verona, Padova, Vicenza, Desenzano",100,180,60,120],
+    ["Bresha, Bergamo, Milano, Novara, Alexandrija, Asti, Alba",100,180,60,110],
+    ["Firence",100,180,60,110],
+    ["Kole Pepe, Folinjo, Spoleto, Arezo, Peruxha, Terni, Rieti",110,200,70,120],
+    ["Siena, Kole Val Dense, Groseto, Viterbo, Orte",120,220,70,120]]}
+];
+
+/* ORARI – Nisja nga Tirana (09:00 & 21:00), pastaj ndalesat */
+const S=[
+  ["09:00","Tiranë","Shqipëri – Nisja e mëngjesit"],
+  ["21:00","Tiranë","Shqipëri – Nisja e darkës"],
+  ["04:00","Elbasan","Shqipëri"],
+  ["05:00","Librazhd","Shqipëri"],
+  ["05:30","Prenjas","Shqipëri"],
+  ["06:00","Strugë","Maqedoni e Veriut"],
+  ["07:00","Kërçovë","Maqedoni e Veriut"],
+  ["08:00","Gostivar","Maqedoni e Veriut"],
+  ["09:00","Tetovë","Maqedoni e Veriut"],
+  ["10:00","Shkup","Maqedoni e Veriut"],
+  ["11:00","Kumanovë","Maqedoni e Veriut"]
+];
+
+const FROM={mk:15,de:100,cz:100,si:40,it:90};
+const FL={mk:"🇲🇰",de:"🇩🇪",cz:"🇨🇿",si:"🇸🇮",it:"🇮🇹"};
+const DS={
+  mk:"Strugë, Kërçovë, Gostivar, Tetovë, Shkup",
+  de:"Mynih, Berlin, Hamburg, Frankfurt dhe qytete të tjera",
+  cz:"Pragë, Brno, Teplice",
+  si:"Lubjanë, Zagreb, Koper dhe qytete të tjera",
+  it:"Roma, Milano, Firence, Verona dhe qytete të tjera"
+};
+
+const $=id=>document.getElementById(id);
+
+/* ORARI */
+$("sched").innerHTML=S.map(s=>
+  `<div class="br"><b>${s[0]}</b><span class="c">${s[1]}<small>${s[2]}</small></span><span class="ok">Nisje e rregullt</span></div>`
+).join("");
+
+/* DESTINACIONET */
+$("dl").innerHTML=G.map(g=>
+  `<a class="dr" href="#cmimet" data-go="${g.k}">
+     <span class="fl">${FL[g.k]}</span>
+     <div><h3>${g.n.replace(/^🇦🇱|^🇲🇰|^🇩🇪|^🇨🇿|^🇸🇮|^🇮🇹\s*/,"").replace(/^[\p{Emoji}\s]+/u,"")}</h3><p>${DS[g.k]}</p></div>
+     <div class="pr">nga<b>${FROM[g.k]}€</b>vajtje</div>
+   </a>`
+).join("");
+
+/* KALENDARI JAVOR */
+const W=["Hën","Mar","Mër","Enj","Pre","Sht","Die"];
+const DY=[
+  ["Maqedoni e Veriut","Nisje nga Tirana – çdo ditë (09:00 & 21:00)",[0,1,2,3,4,5,6]],
+  ["Gjermani","E martë, e mërkurë, e premte, e shtunë",[1,2,4,5]],
+  ["Çeki","Nisje çdo ditë",[0,1,2,3,4,5,6]],
+  ["Slloveni & Kroaci","Çdo ditë sekondar",[0,1,2,3,4,5,6]],
+  ["Slloveni (Monfalkone, Mestre, etj.)","E mërkurë dhe e shtunë",[2,5]],
+  ["Itali","E mërkurë dhe e shtunë (09:00)",[2,5]]
+];
+$("wk").innerHTML=
+  '<div class="wr h"><span></span>'+W.map(d=>`<span style="text-align:center">${d}</span>`).join("")+"</div>"+
+  DY.map(r=>`<div class="wr"><span class="n">${r[0]}<small>${r[1]}</small></span>`+
+    W.map((_,i)=>`<span class="dot${r[2].includes(i)?" on":""}" title="${W[i]}"></span>`).join("")+
+  "</div>").join("");
+
+/* ÇMIMET – filtrimi */
+let cur="all";
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ë/g,"e").replace(/ç/g,"c");
+
+function tabs(){
+  $("tabs").innerHTML=[{k:"all",n:"Të gjitha"},...G]
+    .map(g=>`<button class="tab" data-k="${g.k}" aria-pressed="${g.k===cur}">${g.n}</button>`).join("");
+}
+
+function draw(){
+  const q=norm($("q").value.trim());
+  let h="";
+  G.forEach(g=>{
+    if(cur!=="all"&&g.k!==cur) return;
+    g.r.forEach(r=>{
+      if(q&&!norm(r[0]).includes(q)) return;
+      h+=`<tr><td class="cs">${r[0]}</td>${r.slice(1).map(v=>`<td class="p">${v}€</td>`).join("")}</tr>`;
+    });
+  });
+  $("rows").innerHTML=h;
+  $("none").hidden=!!h;
+}
+
+$("tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button");
+  if(!b) return;
+  cur=b.dataset.k; tabs(); draw();
+});
+$("q").addEventListener("input",draw);
+document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>{
+  cur=a.dataset.go; tabs(); draw();
+}));
+tabs(); draw();
+
+/* LLOGARITËSI */
+const CP={};
+$("cd").innerHTML=G.map(g=>
+  `<optgroup label="${g.n}">`+
+  g.r.flatMap(r=>r[0].split(", ").map(c=>{CP[c]=r;return `<option>${c}</option>`;})).join("")+
+  "</optgroup>"
+).join("");
+
+function calc(){
+  const r=CP[$("cd").value];
+  const rt=$("ct").value==="rt";
+  const a=Math.max(0,+$("ca").value||0);
+  const c=Math.max(0,+$("cc").value||0);
+  const t=a*(rt?r[2]:r[1]) + c*(rt?r[4]:r[3]);
+  $("cT").textContent=t+"€";
+  $("cw").href="https://wa.me/355693799888?text="+encodeURIComponent(
+    `Përshëndetje, dua të rezervoj bilete nga Tirana për ${$("cd").value} (${rt?"vajtje-ardhje (RT)":"vetëm vajtje (OW)"}), ${a} të rritur, ${c} fëmijë. Totali: ${t}€.`
+  );
+}
+
+["cd","ct","ca","cc"].forEach(i=>$(i).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arens Travel – Bileta autobusi nga Tirana për Maqedoni, Gjermani, Itali, Çeki dhe më shumë</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f8fb; --ink:#0f1c2b; --card:#fff; --line:#d5e0ea; --mute:#5a6b7c;
+  --red:#f2493b; --sun:#ffd23f; --sky:#cfe6fb; --navy:#163b5c; --board:#0f1c2b;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a141f; --ink:#eef3f8; --card:#13222f; --line:#243645;
+    --mute:#9db0c0; --sky:#17304a; --board:#050c13;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a141f; --ink:#eef3f8; --card:#13222f; --line:#243645;
+  --mute:#9db0c0; --sky:#17304a; --board:#050c13;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 "DM Sans",system-ui,sans-serif;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,h3,.f{font-family:"Bricolage Grotesque","DM Sans",sans-serif;letter-spacing:-.025em;margin:0}
+a{color:inherit}
+.w{max-width:1120px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+/* HEADER */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;font:800 22px "Bricolage Grotesque",sans-serif}
+.top a.t{font-weight:700;text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:2px}
+
+/* HERO */
+.hero{padding:30px 0 70px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+h1{font-size:clamp(44px,6.4vw,84px);font-weight:800;line-height:.98}
+h1 em{font-style:normal;background:var(--sun);color:#0f1c2b;padding:0 .12em;border-radius:8px;white-space:nowrap}
+.lead{font-size:20px;color:var(--mute);max-width:42ch;margin:24px 0 0}
+
+/* TICKET */
+.tk{display:grid;grid-template-columns:150px 1fr;background:var(--card);border-radius:22px;
+  box-shadow:0 22px 50px -18px rgba(15,28,43,.35);border:1px solid var(--line);position:relative}
+.stub{background:var(--navy);color:#fff;border-radius:22px 0 0 22px;padding:22px 16px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;
+  text-align:center;border-right:3px dashed var(--bg)}
+.stub b{font:800 20px "Bricolage Grotesque",sans-serif;line-height:1.1}
+.stub span{font-size:12px;color:#b4cbe0}
+.tk::before,.tk::after{content:"";position:absolute;left:131px;width:34px;height:34px;border-radius:50%;background:var(--bg);z-index:2}
+.tk::before{top:-17px}
+.tk::after{bottom:-17px}
+.body{padding:24px 26px}
+.body h2{font-size:24px;margin-bottom:16px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg .full{grid-column:1/-1}
+label{display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--mute)}
+select,input[type=number],input[type=search]{
+  width:100%;padding:12px;border-radius:10px;border:2px solid var(--line);
+  background:var(--bg);color:var(--ink);font:500 16px "DM Sans",sans-serif
+}
+/* Fusha statike e nisjes */
+.from-static{
+  display:flex;align-items:center;gap:10px;
+  padding:12px;border-radius:10px;border:2px dashed var(--line);
+  background:var(--bg);font:700 16px "DM Sans",sans-serif;color:var(--ink);
+}
+.from-static .pin{font-size:20px}
+.from-static .badge{
+  margin-left:auto;font:700 11px "DM Sans",sans-serif;
+  background:var(--sun);color:#0f1c2b;padding:3px 9px;border-radius:999px;letter-spacing:.02em;
+}
+.tot{display:flex;justify-content:space-between;align-items:end;margin:18px 0 14px;
+  padding-top:14px;border-top:2px dashed var(--line)}
+.tot span{font-size:14px;color:var(--mute)}
+.tot b{font:800 46px/1 "Bricolage Grotesque",sans-serif}
+.btn{display:block;text-align:center;background:var(--red);color:#fff;font-weight:700;
+  padding:14px;border-radius:12px;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.small{font-size:13px;color:var(--mute);margin:10px 0 0}
+
+/* SECTIONS */
+section{padding:64px 0}
+h2.s{font-size:clamp(30px,4.2vw,48px);font-weight:800;margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 30px;max-width:56ch}
+
+/* DEPARTURE BOARD */
+.board{background:var(--board);color:#fff;border-radius:22px;padding:8px 26px;
+  box-shadow:0 18px 40px -20px rgba(0,0,0,.5)}
+.bh,.br{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.bh{font-size:12px;color:#8fa6bb;font-weight:700}
+.br:last-child{border:0}
+.br b{font:700 28px "Bricolage Grotesque",sans-serif;color:var(--sun);font-variant-numeric:tabular-nums}
+.br .c{font-weight:700;font-size:19px}
+.br small{color:#8fa6bb;font-size:14px;margin-left:8px}
+.ok{color:#6fe3a0;font-size:13px;font-weight:700}
+
+/* DESTINATION LIST */
+.dl{border-top:3px solid var(--ink)}
+.dr{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;
+  padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.dr:hover{background:var(--sky)}
+.dr .fl{font-size:38px}
+.dr h3{font-size:26px}
+.dr p{margin:0;color:var(--mute);font-size:15px}
+.dr .pr{text-align:right;color:var(--mute);font-size:14px}
+.dr .pr b{display:block;font:800 34px "Bricolage Grotesque",sans-serif;color:var(--ink)}
+
+/* TABS + TABLE */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{border:2px solid var(--ink);background:transparent;color:var(--ink);padding:8px 16px;
+  border-radius:999px;font:700 15px "DM Sans",sans-serif;cursor:pointer}
+.tab[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.tw{overflow-x:auto;background:var(--card);border-radius:18px;border:1px solid var(--line);margin-top:14px}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:13px;color:var(--mute)}
+tr:last-child td{border:0}
+td.p{font:700 20px "Bricolage Grotesque",sans-serif;white-space:nowrap}
+.cs{color:var(--mute);font-size:15px}
+.note{font-size:14px;color:var(--mute);margin-top:12px}
+.empty{padding:24px;text-align:center;color:var(--mute)}
+
+/* WEEK GRID */
+.wk{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow-x:auto}
+.wr{display:grid;grid-template-columns:minmax(150px,1.6fr) repeat(7,minmax(40px,1fr));
+  align-items:center;min-width:600px;padding:14px 20px;border-bottom:1px solid var(--line);gap:4px}
+.wr:last-child{border:0}
+.wr.h{font-size:13px;font-weight:700;color:var(--mute)}
+.wr .n{font-weight:700}
+.wr .n small{display:block;font-weight:400;color:var(--mute);font-size:13px}
+.dot{justify-self:center;width:22px;height:22px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--red)}
+.hak{display:flex;gap:16px;align-items:center;margin-top:22px;font-weight:700}
+.hak i{font-style:normal;background:var(--sun);color:#0f1c2b;padding:6px 14px;border-radius:8px;
+  font:800 18px "Bricolage Grotesque",sans-serif}
+
+/* CONTACT */
+.ct{background:var(--navy);color:#fff;border-radius:28px;padding:48px;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+.ct h2{font-size:clamp(32px,4.6vw,56px);font-weight:800;line-height:1}
+.ct p{color:#bcd0e2}
+.ct a.n{display:block;font:800 clamp(24px,3.2vw,34px) "Bricolage Grotesque",sans-serif;
+  text-decoration:none;margin-bottom:6px}
+.ct small{color:#9fb8cf;display:block;margin-top:14px}
+footer{padding:30px 0 40px;color:var(--mute);font-size:14px;display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero,.ct{grid-template-columns:1fr}
+  .tk{grid-template-columns:1fr}
+  .stub{flex-direction:row;border-radius:22px 22px 0 0;border-right:0;
+    border-bottom:3px dashed var(--bg);padding:14px 20px}
+  .tk::before,.tk::after{top:auto;bottom:auto;left:-17px;top:calc(62px - 17px)}
+  .tk::after{left:auto;right:-17px}
+  .ct{padding:30px 24px}
+  .dr{grid-template-columns:48px 1fr auto;gap:12px}
+  .dr h3{font-size:21px}
+  .board{padding:6px 18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="w">
+
+  <div class="top">
+    <a class="logo" href="#">
+      <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" fill="#163b5c" stroke="#fff" stroke-width="3"/>
+        <path d="M30 72 L50 24 L70 72 M38 56 H62" fill="none" stroke="#fff" stroke-width="7"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 78 Q50 60 82 34" fill="none" stroke="#ffd23f" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Arens Travel
+    </a>
+    <a class="t" href="#kontakt">Kontakt</a>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Nga <em>Tirana</em> deri në Evropë, me autobus.</h1>
+      <p class="lead">Linja të rregullta nga Tirana drejt Maqedonisë së Veriut, Gjermanisë, Çekisë,
+        Sllovenisë, Kroacisë dhe Italisë. Magjia e udhëtimit.</p>
+      <div class="hak"><i>HAK BUS</i>partner zyrtar</div>
+    </div>
+
+    <div class="tk">
+      <div class="stub">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#ffd23f" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="12" rx="2"/>
+          <path d="M3 11h18M7 19v-3M17 19v-3"/>
+        </svg>
+        <b>Bileta<br>jote</b>
+        <span>Çmim orientues</span>
+      </div>
+      <div class="body">
+        <h2>Llogarit biletën</h2>
+        <div class="fg">
+
+          <!-- NISJA STATIKE – vetëm Tirana -->
+          <div class="full">
+            <label>Nisja</label>
+            <div class="from-static" aria-label="Nisja: Tiranë">
+              <span class="pin">📍</span>
+              <span>Tiranë</span>
+              <span class="badge">FIKSE</span>
+            </div>
+          </div>
+
+          <label class="full">Destinacioni<select id="cd"></select></label>
+          <label class="full">Lloji i biletës
+            <select id="ct">
+              <option value="ow">Vetëm vajtje (OW)</option>
+              <option value="rt">Vajtje-ardhje (RT)</option>
+            </select>
+          </label>
+          <label>Të rritur<input type="number" id="ca" min="0" max="20" value="1"></label>
+          <label>Fëmijë (deri 10 vjeç)<input type="number" id="cc" min="0" max="20" value="0"></label>
+        </div>
+        <div class="tot"><span>Total</span><b id="cT">0€</b></div>
+        <a class="btn" id="cw" href="https://wa.me/355693799888">Rezervo në WhatsApp</a>
+        <p class="small">Datën dhe çmimin final i konfirmojmë me ty.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="s">Orari i nisjes</h2>
+    <p class="sub">Të gjitha nisjet bëhen nga Tirana. Autobusi kalon nga këto qytete gjatë rrugës.</p>
+    <div class="board">
+      <div class="bh"><span>ORA</span><span>QYTETI</span><span></span></div>
+      <div id="sched"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s">Ku udhëtojmë</h2>
+    <p class="sub">Zgjidh shtetin për të parë çmimet e plota. Nisja: Tiranë.</p>
+    <div class="dl" id="dl"></div>
+  </section>
+
+  <section id="cmimet">
+    <h2 class="s">Çmimet</h2>
+    <p class="sub">Në euro. Kërko qytetin ose filtro sipas shtetit.</p>
+    <div class="tabs" id="tabs"></div>
+    <div style="max-width:420px">
+      <input type="search" id="q" placeholder="Kërko qytetin, p.sh. Milano" aria-label="Kërko qytetin">
+    </div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Destinacioni</th><th>Vajtje (OW)</th><th>Vajtje-ardhje (RT)</th>
+            <th>Fëmijë OW</th><th>Fëmijë RT</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="none" hidden>Nuk u gjet asnjë qytet. Na shkruaj dhe të ndihmojmë.</div>
+    </div>
+    <p class="note">Fëmijët deri në 10 vjeç paguajnë çmim të reduktuar. Çmimet e Italisë janë përditësimi më i fundit.</p>
+  </section>
+
+  <section>
+    <h2 class="s">Kur niset autobusi</h2>
+    <p class="sub">Pika e kuqe do të thotë se ka nisje atë ditë.</p>
+    <div class="wk" id="wk"></div>
+  </section>
+
+  <section id="kontakt">
+    <div class="ct">
+      <div>
+        <h2>Rezervo vendin tënd sot.</h2>
+        <p>Na telefono ose na shkruaj në WhatsApp. Zyra jonë ndodhet në Strugë, Maqedoni e Veriut.</p>
+      </div>
+      <div>
+        <a class="n" href="https://wa.me/355693799888">WhatsApp +355 69 37 99 888</a>
+        <a class="n" href="tel:+355693799888">+355 69 37 99 888</a>
+        <a class="n" href="tel:+355695466002">+355 69 54 66 002</a>
+        <small>info@metrohotelterminal.com</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© Arens Travel</span>
+    <span>Magjia e Udhëtimit · Partner zyrtar HAK BUS</span>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   DESTINACIONET – Maqedonia e Veriut e para, pastaj Gjermania,
+   Çeki, Slloveni & Kroaci, Itali.
+   Struktura e çdo rreshti: [emri, OW, RT, CHD OW, CHD RT]
+   ============================================================ */
+const G=[
+  {k:"mk",n:"🇲🇰 Maqedoni e Veriut",r:[
+    ["Strugë",15,20,15,20],
+    ["Kërçovë",15,24,15,24],
+    ["Gostivar",15,25,15,25],
+    ["Tetovë",15,25,15,25],
+    ["Shkup",20,30,20,30]]},
+
+  {k:"de",n:"🇩🇪 Gjermani",r:[
+    ["Mynih, Augsburg, Ulm",100,180,70,130],
+    ["Shtutgart, Karlsrue, Manhaim, Frankfurt, Bon, Këln, Leverkusen, Dizeldorf, Duisburg, Esen, Bohum, Dortmund",120,220,80,150],
+    ["Dresden, Berlin",100,180,50,100],
+    ["Hamburg",120,220,70,120]]},
+
+  {k:"cz",n:"🇨🇿 Çeki",r:[
+    ["Brno, Pragë, Teplice",100,180,50,100]]},
+
+  {k:"si",n:"🇸🇮 Slloveni & 🇭🇷 Kroaci",r:[
+    ["Lubjanë, Zagreb, Koper",40,80,40,80],
+    ["Monfalkone, Cesalto, Gonars, Frata, Vidor, Pente, Mestre",80,150,60,100]]},
+
+  {k:"it",n:"🇮🇹 Itali",r:[
+    ["Bollonja, Forli, Cesena",90,160,60,100],
+    ["Pesaro, Fano, Faenza, Rimini",100,180,60,100],
+    ["Ankona, Jesi, Civitanova, Askoli Piceno, Teramo, L'Aquila",110,200,70,120],
+    ["Avezano, Roma",120,220,70,120],
+    ["Terst, Portuguaro, Mestre, Trevizo, Verona, Padova, Vicenza, Desenzano",100,180,60,120],
+    ["Bresha, Bergamo, Milano, Novara, Alexandrija, Asti, Alba",100,180,60,110],
+    ["Firence",100,180,60,110],
+    ["Kole Pepe, Folinjo, Spoleto, Arezo, Peruxha, Terni, Rieti",110,200,70,120],
+    ["Siena, Kole Val Dense, Groseto, Viterbo, Orte",120,220,70,120]]}
+];
+
+/* ORARI – Nisja nga Tirana (09:00 & 21:00), pastaj ndalesat */
+const S=[
+  ["09:00","Tiranë","Shqipëri – Nisja e mëngjesit"],
+  ["21:00","Tiranë","Shqipëri – Nisja e darkës"],
+  ["04:00","Elbasan","Shqipëri"],
+  ["05:00","Librazhd","Shqipëri"],
+  ["05:30","Prenjas","Shqipëri"],
+  ["06:00","Strugë","Maqedoni e Veriut"],
+  ["07:00","Kërçovë","Maqedoni e Veriut"],
+  ["08:00","Gostivar","Maqedoni e Veriut"],
+  ["09:00","Tetovë","Maqedoni e Veriut"],
+  ["10:00","Shkup","Maqedoni e Veriut"],
+  ["11:00","Kumanovë","Maqedoni e Veriut"]
+];
+
+const FROM={mk:15,de:100,cz:100,si:40,it:90};
+const FL={mk:"🇲🇰",de:"🇩🇪",cz:"🇨🇿",si:"🇸🇮",it:"🇮🇹"};
+const DS={
+  mk:"Strugë, Kërçovë, Gostivar, Tetovë, Shkup",
+  de:"Mynih, Berlin, Hamburg, Frankfurt dhe qytete të tjera",
+  cz:"Pragë, Brno, Teplice",
+  si:"Lubjanë, Zagreb, Koper dhe qytete të tjera",
+  it:"Roma, Milano, Firence, Verona dhe qytete të tjera"
+};
+
+const $=id=>document.getElementById(id);
+
+/* ORARI */
+$("sched").innerHTML=S.map(s=>
+  `<div class="br"><b>${s[0]}</b><span class="c">${s[1]}<small>${s[2]}</small></span><span class="ok">Nisje e rregullt</span></div>`
+).join("");
+
+/* DESTINACIONET */
+$("dl").innerHTML=G.map(g=>
+  `<a class="dr" href="#cmimet" data-go="${g.k}">
+     <span class="fl">${FL[g.k]}</span>
+     <div><h3>${g.n.replace(/^🇦🇱|^🇲🇰|^🇩🇪|^🇨🇿|^🇸🇮|^🇮🇹\s*/,"").replace(/^[\p{Emoji}\s]+/u,"")}</h3><p>${DS[g.k]}</p></div>
+     <div class="pr">nga<b>${FROM[g.k]}€</b>vajtje</div>
+   </a>`
+).join("");
+
+/* KALENDARI JAVOR */
+const W=["Hën","Mar","Mër","Enj","Pre","Sht","Die"];
+const DY=[
+  ["Maqedoni e Veriut","Nisje nga Tirana – çdo ditë (09:00 & 21:00)",[0,1,2,3,4,5,6]],
+  ["Gjermani","E martë, e mërkurë, e premte, e shtunë",[1,2,4,5]],
+  ["Çeki","Nisje çdo ditë",[0,1,2,3,4,5,6]],
+  ["Slloveni & Kroaci","Çdo ditë sekondar",[0,1,2,3,4,5,6]],
+  ["Slloveni (Monfalkone, Mestre, etj.)","E mërkurë dhe e shtunë",[2,5]],
+  ["Itali","E mërkurë dhe e shtunë (09:00)",[2,5]]
+];
+$("wk").innerHTML=
+  '<div class="wr h"><span></span>'+W.map(d=>`<span style="text-align:center">${d}</span>`).join("")+"</div>"+
+  DY.map(r=>`<div class="wr"><span class="n">${r[0]}<small>${r[1]}</small></span>`+
+    W.map((_,i)=>`<span class="dot${r[2].includes(i)?" on":""}" title="${W[i]}"></span>`).join("")+
+  "</div>").join("");
+
+/* ÇMIMET – filtrimi */
+let cur="all";
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ë/g,"e").replace(/ç/g,"c");
+
+function tabs(){
+  $("tabs").innerHTML=[{k:"all",n:"Të gjitha"},...G]
+    .map(g=>`<button class="tab" data-k="${g.k}" aria-pressed="${g.k===cur}">${g.n}</button>`).join("");
+}
+
+function draw(){
+  const q=norm($("q").value.trim());
+  let h="";
+  G.forEach(g=>{
+    if(cur!=="all"&&g.k!==cur) return;
+    g.r.forEach(r=>{
+      if(q&&!norm(r[0]).includes(q)) return;
+      h+=`<tr><td class="cs">${r[0]}</td>${r.slice(1).map(v=>`<td class="p">${v}€</td>`).join("")}</tr>`;
+    });
+  });
+  $("rows").innerHTML=h;
+  $("none").hidden=!!h;
+}
+
+$("tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button");
+  if(!b) return;
+  cur=b.dataset.k; tabs(); draw();
+});
+$("q").addEventListener("input",draw);
+document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>{
+  cur=a.dataset.go; tabs(); draw();
+}));
+tabs(); draw();
+
+/* LLOGARITËSI */
+const CP={};
+$("cd").innerHTML=G.map(g=>
+  `<optgroup label="${g.n}">`+
+  g.r.flatMap(r=>r[0].split(", ").map(c=>{CP[c]=r;return `<option>${c}</option>`;})).join("")+
+  "</optgroup>"
+).join("");
+
+function calc(){
+  const r=CP[$("cd").value];
+  const rt=$("ct").value==="rt";
+  const a=Math.max(0,+$("ca").value||0);
+  const c=Math.max(0,+$("cc").value||0);
+  const t=a*(rt?r[2]:r[1]) + c*(rt?r[4]:r[3]);
+  $("cT").textContent=t+"€";
+  $("cw").href="https://wa.me/355693799888?text="+encodeURIComponent(
+    `Përshëndetje, dua të rezervoj bilete nga Tirana për ${$("cd").value} (${rt?"vajtje-ardhje (RT)":"vetëm vajtje (OW)"}), ${a} të rritur, ${c} fëmijë. Totali: ${t}€.`
+  );
+}
+
+["cd","ct","ca","cc"].forEach(i=>$(i).addEventListener("input",calc));
+calc();
+</script>
+</body>
+</html>
