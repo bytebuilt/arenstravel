@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <script>
-  // Zbato temën para se faqja të vizatohet – parandalon flash
   (function(){
     try{
       const t = localStorage.getItem("arens-theme");
@@ -20,7 +19,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
 
-<!-- FAVICON -->
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 
@@ -138,6 +136,8 @@ img,svg{max-width:100%;height:auto;display:block}
    HEADER
    ============================================================ */
 .top{
+  position:relative;
+  z-index:1000;
   display:flex;justify-content:space-between;align-items:center;padding:18px 0;
   opacity:0;transform:translateY(-15px);
   animation:fadeDown .8s .2s ease-out forwards;
@@ -168,9 +168,12 @@ img,svg{max-width:100%;height:auto;display:block}
 /* ============================================================
    TOP ACTIONS
    ============================================================ */
-.top-actions{display:flex;align-items:center;gap:14px}
+.top-actions{
+  display:flex;align-items:center;gap:14px;
+  position:relative;
+  z-index:1050;
+}
 
-/* THEME TOGGLE */
 .theme-toggle{
   position:relative;
   width:44px;height:44px;
@@ -185,6 +188,7 @@ img,svg{max-width:100%;height:auto;display:block}
   overflow:hidden;
   transition:border-color .3s ease, transform .3s ease, background .3s ease;
   -webkit-tap-highlight-color:transparent;
+  z-index:1050;
 }
 .theme-toggle:hover{border-color:var(--red);transform:scale(1.06)}
 .theme-toggle:active{transform:scale(.94)}
@@ -204,7 +208,7 @@ img,svg{max-width:100%;height:auto;display:block}
 }
 
 /* LANGUAGE SWITCHER */
-.lang-wrap{position:relative}
+.lang-wrap{position:relative;z-index:1100}
 .lang-toggle{
   display:flex;align-items:center;gap:7px;
   height:44px;padding:0 12px;
@@ -215,6 +219,8 @@ img,svg{max-width:100%;height:auto;display:block}
   font:700 13px "DM Sans",sans-serif;
   transition:border-color .3s ease, transform .3s ease, background .3s ease;
   -webkit-tap-highlight-color:transparent;
+  position:relative;
+  z-index:1100;
 }
 .lang-toggle:hover{border-color:var(--red);transform:scale(1.04)}
 .lang-toggle:active{transform:scale(.96)}
@@ -224,18 +230,30 @@ img,svg{max-width:100%;height:auto;display:block}
 .lang-toggle[aria-expanded="true"] .lang-caret{transform:rotate(180deg)}
 
 .lang-menu{
-  position:absolute;top:calc(100% + 8px);right:0;
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
   min-width:190px;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:14px;
-  box-shadow:0 18px 40px -14px rgba(15,28,43,.35);
+  box-shadow:0 18px 40px -14px rgba(15,28,43,.55),
+             0 0 0 1px rgba(15,28,43,.05);
   padding:6px;
-  opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px) scale(.97);
   transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-  z-index:200;
+  z-index:9999;
+  pointer-events:none;
+  isolation:isolate;
 }
-.lang-menu.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.lang-menu.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
 .lang-opt{
   display:grid;
   grid-template-columns:26px 1fr auto;
@@ -256,15 +274,18 @@ img,svg{max-width:100%;height:auto;display:block}
 .lang-opt b{font-weight:700}
 .lang-opt small{font-size:11px;color:var(--mute);font-weight:700;letter-spacing:.05em}
 
-@media(max-width:400px){
-  .lang-toggle{height:40px;padding:0 10px;gap:5px}
-  .lang-flag{font-size:16px}
-  .lang-code{font-size:12px}
-  .lang-caret{display:none}
-}
-@media(min-width:640px){
-  .lang-toggle{height:46px;padding:0 14px;font-size:14px}
-  .lang-flag{font-size:20px}
+/* Sigurohu që elementet e tjera nuk e mbulojnë menunë */
+.hero,
+section,
+.board,
+.tk,
+.tw,
+.wk,
+.dl,
+.ct,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
@@ -273,7 +294,6 @@ img,svg{max-width:100%;height:auto;display:block}
 .hero{
   padding:20px 0 50px;
   display:grid;grid-template-columns:1fr;gap:32px;align-items:center;
-  position:relative;
 }
 .hero > div:first-child{
   opacity:0;transform:translateY(40px);
@@ -319,7 +339,7 @@ h1 em{
   display:grid;grid-template-columns:1fr;
   background:var(--card);border-radius:22px;
   box-shadow:0 22px 50px -18px rgba(15,28,43,.35);
-  border:1px solid var(--line);position:relative;
+  border:1px solid var(--line);
   transition:transform .4s ease, box-shadow .4s ease, background .4s ease;
 }
 .stub{
@@ -669,14 +689,17 @@ footer{
 .back-top:active{transform:scale(.92)}
 
 /* ============================================================
-   MOBILE
-   ============================================================ */
+   MOBILE   ============================================================ */
 @media(max-width:400px){
   h1{font-size:clamp(34px,9vw,44px)}
   .brand{font-size:16px;gap:8px}
   .brand-logo{width:38px;height:38px}
   .top-actions{gap:8px}
   .theme-toggle{width:40px;height:40px;font-size:16px}
+  .lang-toggle{height:40px;padding:0 10px;gap:5px}
+  .lang-flag{font-size:16px}
+  .lang-code{font-size:12px}
+  .lang-caret{display:none}
   .tot b{font-size:34px}
   .br b{font-size:18px}
   .br .c{font-size:14px}
@@ -693,6 +716,8 @@ footer{
   .brand-logo{width:50px;height:50px}
   .top a.t{font-size:16px}
   .theme-toggle{width:46px;height:46px;font-size:20px}
+  .lang-toggle{height:46px;padding:0 14px;font-size:14px}
+  .lang-flag{font-size:20px}
   .hero{padding:30px 0 70px}
   .lead{font-size:19px}
   .stub{padding:20px 24px}
@@ -763,7 +788,6 @@ footer{
 </head>
 <body>
 
-<!-- PRELOADER -->
 <div class="preloader" id="preloader" role="status" aria-label="Duke ngarkuar">
   <div class="road">
     <div class="bus" aria-hidden="true">🚌</div>
@@ -923,7 +947,7 @@ footer{
 
 <script>
 /* ============================================================
-   DESTINACIONET – me emra në 5 gjuhë (SQ|EN|DE|IT|MK)
+   DESTINACIONET – 5 gjuhë (SQ|EN|DE|IT|MK)
    ============================================================ */
 const G=[
   {k:"mk",n:{sq:"🇲🇰 Maqedoni e Veriut",en:"🇲🇰 North Macedonia",de:"🇲🇰 Nordmazedonien",it:"🇲🇰 Macedonia del Nord",mk:"🇲🇰 Северна Македонија"},r:[
@@ -954,7 +978,6 @@ const G=[
     ["Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Сиена, Коле Вал д'Елса, Гросето, Витербо, Орте",120,220,70,120]]}
 ];
 
-/* Orari – 5 gjuhë */
 const S_DATA = {
   sq:[["09:00","Tirana","Shqipëri – Nisja e mëngjesit"],["21:00","Tirana","Shqipëri – Nisja e darkës"],["04:00","Elbasan","Shqipëri"],["05:00","Librazhd","Shqipëri"],["05:30","Prenjas","Shqipëri"],["06:00","Strugë","Maqedoni e Veriut"],["07:00","Kërçovë","Maqedoni e Veriut"],["08:00","Gostivar","Maqedoni e Veriut"],["09:00","Tetovë","Maqedoni e Veriut"],["10:00","Shkup","Maqedoni e Veriut"],["11:00","Kumanovë","Maqedoni e Veriut"]],
   en:[["09:00","Tirana","Albania – Morning departure"],["21:00","Tirana","Albania – Evening departure"],["04:00","Elbasan","Albania"],["05:00","Librazhd","Albania"],["05:30","Prenjas","Albania"],["06:00","Struga","North Macedonia"],["07:00","Kičevo","North Macedonia"],["08:00","Gostivar","North Macedonia"],["09:00","Tetovo","North Macedonia"],["10:00","Skopje","North Macedonia"],["11:00","Kumanovo","North Macedonia"]],
@@ -991,9 +1014,6 @@ const DY_DATA = {
 
 const $=id=>document.getElementById(id);
 
-/* ============================================================
-   I18N – FJALORI I PLOTË NË 5 GJUHË
-   ============================================================ */
 const I18N = {
   sq:{
     "preloader.text":"Duke u nisur nga Tirana",
@@ -1193,9 +1213,6 @@ function renderCityDropdown(){
   Object.assign(CP, CP_new);
 }
 
-/* ============================================================
-   APPLY LANG
-   ============================================================ */
 function applyLang(lang){
   if (!I18N[lang]) lang = "sq";
   currentLang = lang;
@@ -1237,12 +1254,12 @@ function applyLang(lang){
 }
 
 /* ============================================================
-   INIT LANG
+   INIT LANG – GJITHMONË SHQIP
    ============================================================ */
 (function initLang(){
   const saved = localStorage.getItem("arens-lang");
-  const browserLang = (navigator.language || "sq").slice(0, 2).toLowerCase();
-  const initial = saved && I18N[saved] ? saved : (I18N[browserLang] ? browserLang : "sq");
+  // GJITHMONË SHQIP nëse nuk ka zgjedhje të mëparshme
+  const initial = saved && I18N[saved] ? saved : "sq";
 
   const toggle = document.getElementById("langToggle");
   const menu = document.getElementById("langMenu");
@@ -1352,7 +1369,7 @@ setInterval(updateClock, 1000);
 updateClock();
 
 /* ============================================================
-   ÇMIMET – TABS + TABLE
+   ÇMIMET
    ============================================================ */
 let cur = "all";
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ë/g, "e").replace(/ç/g, "c");
