@@ -20,7 +20,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
 
-<!-- FAVICON – LOGOJA NË TAB-IN E BROWSERIT -->
+<!-- FAVICON -->
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 
@@ -66,7 +66,7 @@ img,svg{max-width:100%;height:auto;display:block}
 :focus-visible{outline:3px solid var(--red);outline-offset:2px}
 
 /* ============================================================
-   PRELOADER – AUTOBUS QË ECËN HORIZONTALISHT
+   PRELOADER
    ============================================================ */
 .preloader{
   position:fixed;inset:0;background:var(--navy);color:#fff;
@@ -75,7 +75,6 @@ img,svg{max-width:100%;height:auto;display:block}
   overflow:hidden;padding:20px;
 }
 .preloader.hide{opacity:0;visibility:hidden}
-
 .preloader .road{
   position:relative;width:100%;max-width:420px;height:90px;
   display:flex;align-items:center;
@@ -88,10 +87,7 @@ img,svg{max-width:100%;height:auto;display:block}
   border-radius:2px;
   animation:dash 1s linear infinite;
 }
-@keyframes dash{
-  to{background-position:-52px 0}
-}
-
+@keyframes dash{to{background-position:-52px 0}}
 .preloader .bus{
   position:absolute;bottom:20px;left:0;
   font-size:56px;line-height:1;
@@ -105,7 +101,6 @@ img,svg{max-width:100%;height:auto;display:block}
   55%{transform:scaleX(1) translateY(0)}
   100%{left:calc(100% - 56px);transform:scaleX(1) translateY(0)}
 }
-
 .preloader .dust{
   position:absolute;bottom:18px;left:0;
   width:100%;height:20px;pointer-events:none;
@@ -123,16 +118,12 @@ img,svg{max-width:100%;height:auto;display:block}
   20%{opacity:.8}
   100%{opacity:0;left:60%;transform:translateY(-14px) scale(.3)}
 }
-
 .preloader p{
   margin-top:24px;font:700 14px "Bricolage Grotesque",sans-serif;
   letter-spacing:.18em;color:#bcd0e2;text-transform:uppercase;
   animation:textPulse 1.5s ease-in-out infinite;
 }
-@keyframes textPulse{
-  0%,100%{opacity:.5}
-  50%{opacity:1}
-}
+@keyframes textPulse{0%,100%{opacity:.5}50%{opacity:1}}
 .preloader .bar{
   margin-top:16px;width:200px;max-width:80vw;height:4px;
   background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;
@@ -151,8 +142,6 @@ img,svg{max-width:100%;height:auto;display:block}
   opacity:0;transform:translateY(-15px);
   animation:fadeDown .8s .2s ease-out forwards;
 }
-
-/* LOGO E RE – VETËM RRETHI I GLOBIT */
 .brand{
   display:flex;align-items:center;gap:10px;text-decoration:none;
   font:800 18px "Bricolage Grotesque",sans-serif;
@@ -170,7 +159,6 @@ img,svg{max-width:100%;height:auto;display:block}
 .brand:active .brand-logo{
   transform:rotate(-8deg) scale(1.08);
 }
-
 .top a.t{
   font-weight:700;font-size:15px;text-decoration:none;
   border-bottom:2px solid var(--red);padding-bottom:2px;transition:color .3s;
@@ -178,12 +166,11 @@ img,svg{max-width:100%;height:auto;display:block}
 @keyframes fadeDown{to{opacity:1;transform:translateY(0)}}
 
 /* ============================================================
-   TOP ACTIONS + THEME TOGGLE
+   TOP ACTIONS
    ============================================================ */
-.top-actions{
-  display:flex;align-items:center;gap:14px;
-}
+.top-actions{display:flex;align-items:center;gap:14px}
 
+/* THEME TOGGLE */
 .theme-toggle{
   position:relative;
   width:44px;height:44px;
@@ -209,13 +196,75 @@ img,svg{max-width:100%;height:auto;display:block}
 }
 .theme-toggle .ico-sun{opacity:1;transform:rotate(0) scale(1)}
 .theme-toggle .ico-moon{opacity:0;transform:rotate(-90deg) scale(.4)}
-
 :root[data-theme="dark"] .theme-toggle .ico-sun{opacity:0;transform:rotate(90deg) scale(.4)}
 :root[data-theme="dark"] .theme-toggle .ico-moon{opacity:1;transform:rotate(0) scale(1)}
-
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .theme-toggle .ico-sun{opacity:0;transform:rotate(90deg) scale(.4)}
   :root:not([data-theme="light"]) .theme-toggle .ico-moon{opacity:1;transform:rotate(0) scale(1)}
+}
+
+/* LANGUAGE SWITCHER */
+.lang-wrap{position:relative}
+.lang-toggle{
+  display:flex;align-items:center;gap:7px;
+  height:44px;padding:0 12px;
+  border-radius:999px;
+  border:2px solid var(--line);
+  background:var(--card);color:var(--ink);
+  cursor:pointer;
+  font:700 13px "DM Sans",sans-serif;
+  transition:border-color .3s ease, transform .3s ease, background .3s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.lang-toggle:hover{border-color:var(--red);transform:scale(1.04)}
+.lang-toggle:active{transform:scale(.96)}
+.lang-flag{font-size:18px;line-height:1}
+.lang-code{letter-spacing:.05em}
+.lang-caret{width:10px;height:7px;transition:transform .3s ease;opacity:.6}
+.lang-toggle[aria-expanded="true"] .lang-caret{transform:rotate(180deg)}
+
+.lang-menu{
+  position:absolute;top:calc(100% + 8px);right:0;
+  min-width:190px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 18px 40px -14px rgba(15,28,43,.35);
+  padding:6px;
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);
+  transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+  z-index:200;
+}
+.lang-menu.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.lang-opt{
+  display:grid;
+  grid-template-columns:26px 1fr auto;
+  align-items:center;gap:10px;
+  width:100%;
+  padding:10px 12px;
+  border:none;background:transparent;color:var(--ink);
+  border-radius:10px;
+  cursor:pointer;
+  font:500 14px "DM Sans",sans-serif;
+  text-align:left;
+  transition:background .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.lang-opt:hover,.lang-opt:focus-visible{background:var(--sky);outline:none}
+.lang-opt[aria-current="true"]{background:var(--sky)}
+.lang-opt span{font-size:20px;line-height:1}
+.lang-opt b{font-weight:700}
+.lang-opt small{font-size:11px;color:var(--mute);font-weight:700;letter-spacing:.05em}
+
+@media(max-width:400px){
+  .lang-toggle{height:40px;padding:0 10px;gap:5px}
+  .lang-flag{font-size:16px}
+  .lang-code{font-size:12px}
+  .lang-caret{display:none}
+}
+@media(min-width:640px){
+  .lang-toggle{height:46px;padding:0 14px;font-size:14px}
+  .lang-flag{font-size:20px}
 }
 
 /* ============================================================
@@ -261,10 +310,7 @@ h1 em{
     z-index:0;
   }
 }
-@keyframes drive2{
-  0%{left:-100px}
-  100%{left:110%}
-}
+@keyframes drive2{0%{left:-100px}100%{left:110%}}
 
 /* ============================================================
    TICKET
@@ -295,12 +341,8 @@ h1 em{
   0%,100%{transform:translateY(0) rotate(0)}
   50%{transform:translateY(-6px) rotate(3deg)}
 }
-.stub b{
-  font:800 17px "Bricolage Grotesque",sans-serif;
-  line-height:1.15;flex:1;
-}
+.stub b{font:800 17px "Bricolage Grotesque",sans-serif;line-height:1.15;flex:1}
 .stub span{font-size:11px;color:#b4cbe0;white-space:nowrap}
-
 .tk::before,.tk::after{
   content:"";position:absolute;width:34px;height:34px;border-radius:50%;
   background:var(--bg);z-index:2;
@@ -334,7 +376,6 @@ select:focus,input:focus{
   box-shadow:0 0 0 4px rgba(242,73,59,.15);
   outline:none;
 }
-
 .from-static{
   display:flex;align-items:center;gap:10px;
   padding:12px;border-radius:10px;
@@ -342,21 +383,14 @@ select:focus,input:focus{
   background:var(--bg);
   font:700 15px "DM Sans",sans-serif;color:var(--ink);
 }
-.from-static .pin{
-  font-size:18px;display:inline-block;
-  animation:pinBounce 2s ease-in-out infinite;
-}
-@keyframes pinBounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
-}
+.from-static .pin{font-size:18px;display:inline-block;animation:pinBounce 2s ease-in-out infinite}
+@keyframes pinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .from-static .badge{
   margin-left:auto;
   font:700 10px "DM Sans",sans-serif;
   background:var(--sun);color:#0f1c2b;
   padding:3px 9px;border-radius:999px;letter-spacing:.02em;
 }
-
 .tot{
   display:flex;justify-content:space-between;align-items:end;
   margin:16px 0 12px;padding-top:14px;
@@ -374,7 +408,6 @@ select:focus,input:focus{
   50%{transform:scale(1.12);color:var(--red)}
   100%{transform:scale(1)}
 }
-
 .btn{
   display:block;text-align:center;background:var(--red);color:#fff;font-weight:700;
   padding:15px;border-radius:12px;text-decoration:none;
@@ -433,15 +466,9 @@ h2.s{font-size:clamp(26px,7vw,40px);font-weight:800;margin-bottom:8px;line-heigh
 }
 .bh{font-size:11px;color:#8fa6bb;font-weight:700;letter-spacing:.08em}
 .br:last-child{border:0}
-.br{
-  opacity:0;transform:translateX(-25px);
-  transition:opacity .5s ease, transform .5s ease;
-}
+.br{opacity:0;transform:translateX(-25px);transition:opacity .5s ease, transform .5s ease}
 .br.reveal{opacity:1;transform:translateX(0)}
-.br b{
-  font:700 20px "Bricolage Grotesque",sans-serif;
-  color:var(--sun);font-variant-numeric:tabular-nums;
-}
+.br b{font:700 20px "Bricolage Grotesque",sans-serif;color:var(--sun);font-variant-numeric:tabular-nums}
 .br .c{font-weight:700;font-size:15px;line-height:1.3}
 .br small{color:#8fa6bb;font-size:12px;margin-left:6px;display:inline-block}
 .ok{
@@ -479,10 +506,7 @@ h2.s{font-size:clamp(26px,7vw,40px);font-weight:800;margin-bottom:8px;line-heigh
   -webkit-tap-highlight-color:transparent;
 }
 .dr:active{background:var(--sky)}
-.dr .fl{
-  font-size:30px;display:inline-block;
-  transition:transform .4s ease;
-}
+.dr .fl{font-size:30px;display:inline-block;transition:transform .4s ease}
 .dr:active .fl{transform:scale(1.15)}
 .dr h3{font-size:19px;line-height:1.2}
 .dr p{margin:2px 0 0;color:var(--mute);font-size:13px;line-height:1.35}
@@ -516,7 +540,6 @@ h2.s{font-size:clamp(26px,7vw,40px);font-weight:800;margin-bottom:8px;line-heigh
 }
 .tab:active{transform:scale(.96)}
 .tab[aria-pressed=true]{background:var(--ink);color:var(--bg)}
-
 .tw{
   overflow-x:auto;background:var(--card);border-radius:16px;
   border:1px solid var(--line);margin-top:12px;
@@ -527,10 +550,7 @@ table{width:100%;border-collapse:collapse;min-width:600px}
 th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
 th{font-size:12px;color:var(--mute);font-weight:700;letter-spacing:.03em}
 tr:last-child td{border:0}
-tbody tr{
-  opacity:0;transform:translateY(12px);
-  animation:rowIn .5s ease forwards;
-}
+tbody tr{opacity:0;transform:translateY(12px);animation:rowIn .5s ease forwards}
 tbody tr:nth-child(1){animation-delay:.03s}
 tbody tr:nth-child(2){animation-delay:.06s}
 tbody tr:nth-child(3){animation-delay:.09s}
@@ -570,15 +590,11 @@ td.p{font:700 17px "Bricolage Grotesque",sans-serif;white-space:nowrap}
   justify-self:center;width:18px;height:18px;border-radius:50%;
   background:var(--line);transition:transform .3s ease, background .3s ease;
 }
-.dot.on{
-  background:var(--red);
-  animation:dotPulse 1.8s ease-in-out infinite;
-}
+.dot.on{background:var(--red);animation:dotPulse 1.8s ease-in-out infinite}
 @keyframes dotPulse{
   0%,100%{box-shadow:0 0 0 0 rgba(242,73,59,.6)}
   50%{box-shadow:0 0 0 8px rgba(242,73,59,0)}
 }
-
 .hak{
   display:flex;gap:12px;align-items:center;
   margin-top:20px;font-weight:700;font-size:15px;flex-wrap:wrap;
@@ -653,13 +669,13 @@ footer{
 .back-top:active{transform:scale(.92)}
 
 /* ============================================================
-   MOBILE OPTIMIZATIONS
+   MOBILE
    ============================================================ */
 @media(max-width:400px){
   h1{font-size:clamp(34px,9vw,44px)}
   .brand{font-size:16px;gap:8px}
   .brand-logo{width:38px;height:38px}
-  .top-actions{gap:10px}
+  .top-actions{gap:8px}
   .theme-toggle{width:40px;height:40px;font-size:16px}
   .tot b{font-size:34px}
   .br b{font-size:18px}
@@ -670,7 +686,6 @@ footer{
   .fg{grid-template-columns:1fr}
   .body{padding:18px 16px}
 }
-
 @media(min-width:640px){
   .w{padding:0 22px}
   .top{padding:22px 0}
@@ -717,7 +732,6 @@ footer{
   .hak{font-size:16px}
   .hak i{font-size:18px;padding:6px 14px}
 }
-
 @media(min-width:861px){
   .hero{grid-template-columns:1fr 1.05fr;gap:48px}
   .tk{grid-template-columns:150px 1fr}
@@ -737,7 +751,6 @@ footer{
   .ct{grid-template-columns:1.1fr 1fr;padding:48px;gap:36px}
   .back-top{width:56px;height:56px;font-size:24px}
 }
-
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -750,7 +763,7 @@ footer{
 </head>
 <body>
 
-<!-- ============ PRELOADER ============ -->
+<!-- PRELOADER -->
 <div class="preloader" id="preloader" role="status" aria-label="Duke ngarkuar">
   <div class="road">
     <div class="bus" aria-hidden="true">🚌</div>
@@ -758,7 +771,7 @@ footer{
       <span></span><span></span><span></span><span></span>
     </div>
   </div>
-  <p>Duke u nisur nga Tirana</p>
+  <p data-i18n="preloader.text">Duke u nisur nga Tirana</p>
   <div class="bar"><span></span></div>
 </div>
 
@@ -770,20 +783,36 @@ footer{
       <span>Arens Travel</span>
     </a>
     <div class="top-actions">
+      <div class="lang-wrap">
+        <button class="lang-toggle" id="langToggle" aria-label="Ndrysho gjuhën" title="Ndrysho gjuhën" aria-expanded="false">
+          <span class="lang-flag" id="langCurrentFlag">🇦🇱</span>
+          <span class="lang-code" id="langCurrentCode">SQ</span>
+          <svg class="lang-caret" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+          <button class="lang-opt" data-lang="sq" role="menuitem"><span>🇦🇱</span><b>Shqip</b><small>SQ</small></button>
+          <button class="lang-opt" data-lang="en" role="menuitem"><span>🇬🇧</span><b>English</b><small>EN</small></button>
+          <button class="lang-opt" data-lang="de" role="menuitem"><span>🇩🇪</span><b>Deutsch</b><small>DE</small></button>
+          <button class="lang-opt" data-lang="it" role="menuitem"><span>🇮🇹</span><b>Italiano</b><small>IT</small></button>
+          <button class="lang-opt" data-lang="mk" role="menuitem"><span>🇲🇰</span><b>Македонски</b><small>MK</small></button>
+        </div>
+      </div>
       <button class="theme-toggle" id="themeToggle" aria-label="Ndrysho temën" title="Ndrysho temën">
         <span class="ico-sun" aria-hidden="true">☀️</span>
         <span class="ico-moon" aria-hidden="true">🌙</span>
       </button>
-      <a class="t" href="#kontakt">Kontakt</a>
+      <a class="t" href="#kontakt" data-i18n="nav.contact">Kontakt</a>
     </div>
   </div>
 
   <div class="hero">
     <div>
-      <h1>Nga <em>Tirana</em> deri në Evropë, me autobus.</h1>
-      <p class="lead">Linja të rregullta nga Tirana drejt Maqedonisë së Veriut, Gjermanisë, Çekisë,
-        Sllovenisë, Kroacisë dhe Italisë. Magjia e udhëtimit.</p>
-      <div class="hak"><i>HAK BUS</i>partner zyrtar</div>
+      <h1 data-i18n-html="hero.h1">Nga <em>Tirana</em> deri në Evropë, me autobus.</h1>
+      <p class="lead" data-i18n="hero.lead">Linja të rregullta nga Tirana drejt Maqedonisë së Veriut, Gjermanisë, Çekisë, Sllovenisë, Kroacisë dhe Italisë. Magjia e udhëtimit.</p>
+      <div class="hak"><i>HAK BUS</i><span data-i18n="hero.partner">partner zyrtar</span></div>
     </div>
 
     <div class="tk">
@@ -792,87 +821,88 @@ footer{
           <rect x="3" y="4" width="18" height="12" rx="2"/>
           <path d="M3 11h18M7 19v-3M17 19v-3"/>
         </svg>
-        <b>Bileta jote</b>
-        <span>Çmim orientues</span>
+        <b data-i18n="ticket.title">Bileta jote</b>
+        <span data-i18n="ticket.sub">Çmim orientues</span>
       </div>
       <div class="body">
-        <h2>Llogarit biletën</h2>
+        <h2 data-i18n="calc.title">Llogarit biletën</h2>
         <div class="fg">
-
           <div class="full">
-            <label>Nisja</label>
-            <div class="from-static" aria-label="Nisja: Tiranë">
+            <label data-i18n="calc.from">Nisja</label>
+            <div class="from-static">
               <span class="pin">📍</span>
-              <span>Tirana</span>
-              <span class="badge">FIKSE</span>
+              <span data-i18n="calc.fromCity">Tirana</span>
+              <span class="badge" data-i18n="calc.fixed">FIKSE</span>
             </div>
           </div>
-
-          <label class="full">Destinacioni<select id="cd"></select></label>
-          <label class="full">Lloji i biletës
+          <label class="full"><span data-i18n="calc.dest">Destinacioni</span><select id="cd"></select></label>
+          <label class="full"><span data-i18n="calc.type">Lloji i biletës</span>
             <select id="ct">
-              <option value="ow">Vetëm vajtje (OW)</option>
-              <option value="rt">Vajtje-ardhje (RT)</option>
+              <option value="ow" data-i18n="calc.ow">Vetëm vajtje (OW)</option>
+              <option value="rt" data-i18n="calc.rt">Vajtje-ardhje (RT)</option>
             </select>
           </label>
-          <label>Të rritur<input type="number" id="ca" min="0" max="20" value="1" inputmode="numeric"></label>
-          <label>Fëmijë (deri 10 vjeç)<input type="number" id="cc" min="0" max="20" value="0" inputmode="numeric"></label>
+          <label><span data-i18n="calc.adults">Të rritur</span><input type="number" id="ca" min="0" max="20" value="1" inputmode="numeric"></label>
+          <label><span data-i18n="calc.kids">Fëmijë (deri 10 vjeç)</span><input type="number" id="cc" min="0" max="20" value="0" inputmode="numeric"></label>
         </div>
-        <div class="tot"><span>Total</span><b id="cT">0€</b></div>
-        <a class="btn" id="cw" href="https://wa.me/355693799888">Rezervo në WhatsApp</a>
-        <p class="small">Datën dhe çmimin final i konfirmojmë me ty.</p>
+        <div class="tot"><span data-i18n="calc.total">Total</span><b id="cT">0€</b></div>
+        <a class="btn" id="cw" href="https://wa.me/355693799888" data-i18n="calc.book">Rezervo në WhatsApp</a>
+        <p class="small" data-i18n="calc.note">Datën dhe çmimin final i konfirmojmë me ty.</p>
       </div>
     </div>
   </div>
 
   <section>
-    <h2 class="s">Orari i nisjes <span class="live-clock" id="liveClock">--:--</span></h2>
-    <p class="sub">Të gjitha nisjet bëhen nga Tirana. Autobusi kalon nga këto qytete gjatë rrugës.</p>
+    <h2 class="s"><span data-i18n="sched.title">Orari i nisjes</span> <span class="live-clock" id="liveClock">--:--</span></h2>
+    <p class="sub" data-i18n="sched.sub">Të gjitha nisjet bëhen nga Tirana. Autobusi kalon nga këto qytete gjatë rrugës.</p>
     <div class="board">
-      <div class="bh"><span>ORA</span><span>QYTETI</span><span></span></div>
+      <div class="bh"><span data-i18n="sched.time">ORA</span><span data-i18n="sched.city">QYTETI</span><span></span></div>
       <div id="sched"></div>
     </div>
   </section>
 
   <section>
-    <h2 class="s">Ku udhëtojmë</h2>
-    <p class="sub">Zgjidh shtetin për të parë çmimet e plota. Nisja: Tiranë.</p>
+    <h2 class="s" data-i18n="dest.title">Ku udhëtojmë</h2>
+    <p class="sub" data-i18n="dest.sub">Zgjidh shtetin për të parë çmimet e plota. Nisja: Tiranë.</p>
     <div class="dl" id="dl"></div>
   </section>
 
   <section id="cmimet">
-    <h2 class="s">Çmimet</h2>
-    <p class="sub">Në euro. Kërko qytetin ose filtro sipas shtetit.</p>
+    <h2 class="s" data-i18n="price.title">Çmimet</h2>
+    <p class="sub" data-i18n="price.sub">Në euro. Kërko qytetin ose filtro sipas shtetit.</p>
     <div class="tabs" id="tabs"></div>
     <div style="max-width:420px;margin-bottom:8px">
-      <input type="search" id="q" placeholder="Kërko qytetin, p.sh. Milano" aria-label="Kërko qytetin" autocomplete="off">
+      <input type="search" id="q" placeholder="Kërko qytetin, p.sh. Milano" aria-label="Kërko qytetin" autocomplete="off" data-i18n-placeholder="price.search">
     </div>
     <div class="tw">
       <table>
         <thead>
           <tr>
-            <th>Destinacioni</th><th>Vajtje (OW)</th><th>Vajtje-ardhje (RT)</th>
-            <th>Fëmijë OW</th><th>Fëmijë RT</th>
+            <th data-i18n="price.thDest">Destinacioni</th>
+            <th data-i18n="price.thOW">Vajtje (OW)</th>
+            <th data-i18n="price.thRT">Vajtje-ardhje (RT)</th>
+            <th data-i18n="price.thKidOW">Fëmijë OW</th>
+            <th data-i18n="price.thKidRT">Fëmijë RT</th>
           </tr>
         </thead>
         <tbody id="rows"></tbody>
       </table>
-      <div class="empty" id="none" hidden>Nuk u gjet asnjë qytet. Na shkruaj dhe të ndihmojmë.</div>
+      <div class="empty" id="none" hidden data-i18n="price.none">Nuk u gjet asnjë qytet. Na shkruaj dhe të ndihmojmë.</div>
     </div>
-    <p class="note">Fëmijët deri në 10 vjeç paguajnë çmim të reduktuar. Çmimet e Italisë janë përditësimi më i fundit.</p>
+    <p class="note" data-i18n="price.note">Fëmijët deri në 10 vjeç paguajnë çmim të reduktuar. Çmimet e Italisë janë përditësimi më i fundit.</p>
   </section>
 
   <section>
-    <h2 class="s">Kur niset autobusi</h2>
-    <p class="sub">Pika e kuqe do të thotë se ka nisje atë ditë.</p>
+    <h2 class="s" data-i18n="when.title">Kur niset autobusi</h2>
+    <p class="sub" data-i18n="when.sub">Pika e kuqe do të thotë se ka nisje atë ditë.</p>
     <div class="wk" id="wk"></div>
   </section>
 
   <section id="kontakt">
     <div class="ct">
       <div>
-        <h2>Rezervo vendin tënd sot.</h2>
-        <p>Na telefono ose na shkruaj në WhatsApp. Zyra jonë ndodhet në Strugë, Maqedoni e Veriut.</p>
+        <h2 data-i18n="contact.title">Rezervo vendin tënd sot.</h2>
+        <p data-i18n="contact.sub">Na telefono ose na shkruaj në WhatsApp. Zyra jonë ndodhet në Strugë, Maqedoni e Veriut.</p>
       </div>
       <div>
         <a class="n" href="https://wa.me/355693799888">WhatsApp +355 69 37 99 888</a>
@@ -884,8 +914,8 @@ footer{
   </section>
 
   <footer>
-    <span>© Arens Travel</span>
-    <span>Magjia e Udhëtimit · Partner zyrtar HAK BUS</span>
+    <span data-i18n="footer.copy">© Arens Travel</span>
+    <span data-i18n="footer.tag">Magjia e Udhëtimit · Partner zyrtar HAK BUS</span>
   </footer>
 </div>
 
@@ -893,95 +923,385 @@ footer{
 
 <script>
 /* ============================================================
-   DESTINACIONET – Emrat ORIGJINALË (përveç Maqedonisë)
-   Struktura: [emri, OW, RT, CHD OW, CHD RT]
+   DESTINACIONET – me emra në 5 gjuhë (SQ|EN|DE|IT|MK)
    ============================================================ */
 const G=[
-  {k:"mk",n:"🇲🇰 Maqedoni e Veriut",r:[
-    ["Strugë",15,20,15,20],
-    ["Kërçovë",15,24,15,24],
-    ["Gostivar",15,25,15,25],
-    ["Tetovë",15,25,15,25],
-    ["Shkup",20,30,20,30]]},
-
-  {k:"de",n:"🇩🇪 Gjermani",r:[
-    ["München, Augsburg, Ulm",100,180,70,130],
-    ["Stuttgart, Karlsruhe, Mannheim, Frankfurt, Bonn, Köln, Leverkusen, Düsseldorf, Duisburg, Essen, Bochum, Dortmund",120,220,80,150],
-    ["Dresden, Berlin",100,180,50,100],
-    ["Hamburg",120,220,70,120]]},
-
-  {k:"cz",n:"🇨🇿 Çeki",r:[
-    ["Brno, Praha, Teplice",100,180,50,100]]},
-
-  {k:"si",n:"🇸🇮 Slloveni & 🇭🇷 Kroaci",r:[
-    ["Ljubljana, Zagreb, Koper",40,80,40,80],
-    ["Monfalcone, Casalto, Gonars, Fratta, Vidor, Ponte, Mestre",80,150,60,100]]},
-
-  {k:"it",n:"🇮🇹 Itali",r:[
-    ["Bologna, Forlì, Cesena",90,160,60,100],
-    ["Pesaro, Fano, Faenza, Rimini",100,180,60,100],
-    ["Ancona, Jesi, Civitanova, Ascoli Piceno, Teramo, L'Aquila",110,200,70,120],
-    ["Avezzano, Roma",120,220,70,120],
-    ["Trieste, Portogruaro, Mestre, Treviso, Verona, Padova, Vicenza, Desenzano",100,180,60,120],
-    ["Brescia, Bergamo, Milano, Novara, Alessandria, Asti, Alba",100,180,60,110],
-    ["Firenze",100,180,60,110],
-    ["Collepepe, Foligno, Spoleto, Arezzo, Perugia, Terni, Rieti",110,200,70,120],
-    ["Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte",120,220,70,120]]}
+  {k:"mk",n:{sq:"🇲🇰 Maqedoni e Veriut",en:"🇲🇰 North Macedonia",de:"🇲🇰 Nordmazedonien",it:"🇲🇰 Macedonia del Nord",mk:"🇲🇰 Северна Македонија"},r:[
+    ["Strugë|Struga|Struga|Struga|Струга",15,20,15,20],
+    ["Kërçovë|Kičevo|Kičevo|Kičevo|Кичево",15,24,15,24],
+    ["Gostivar|Gostivar|Gostivar|Gostivar|Гостивар",15,25,15,25],
+    ["Tetovë|Tetovo|Tetovo|Tetovo|Тетово",15,25,15,25],
+    ["Shkup|Skopje|Skopje|Skopje|Скопје",20,30,20,30]]},
+  {k:"de",n:{sq:"🇩🇪 Gjermani",en:"🇩🇪 Germany",de:"🇩🇪 Deutschland",it:"🇩🇪 Germania",mk:"🇩🇪 Германија"},r:[
+    ["München, Augsburg, Ulm|München, Augsburg, Ulm|München, Augsburg, Ulm|Monaco, Augusta, Ulm|Минхен, Аугсбург, Улм",100,180,70,130],
+    ["Stuttgart, Karlsruhe, Mannheim, Frankfurt, Bonn, Köln, Leverkusen, Düsseldorf, Duisburg, Essen, Bochum, Dortmund|Stuttgart, Karlsruhe, Mannheim, Frankfurt, Bonn, Cologne, Leverkusen, Düsseldorf, Duisburg, Essen, Bochum, Dortmund|Stuttgart, Karlsruhe, Mannheim, Frankfurt, Bonn, Köln, Leverkusen, Düsseldorf, Duisburg, Essen, Bochum, Dortmund|Stoccarda, Karlsruhe, Mannheim, Francoforte, Bonn, Colonia, Leverkusen, Düsseldorf, Duisburg, Essen, Bochum, Dortmund|Штутгарт, Карлсруе, Манхајм, Франкфурт, Бон, Келн, Леверкузен, Дизелдорф, Дисбург, Есен, Бохум, Дортмунд",120,220,80,150],
+    ["Dresden, Berlin|Dresden, Berlin|Dresden, Berlin|Dresda, Berlino|Дрезден, Берлин",100,180,50,100],
+    ["Hamburg|Hamburg|Hamburg|Amburgo|Хамбург",120,220,70,120]]},
+  {k:"cz",n:{sq:"🇨🇿 Çeki",en:"🇨🇿 Czechia",de:"🇨🇿 Tschechien",it:"🇨🇿 Repubblica Ceca",mk:"🇨🇿 Чешка"},r:[
+    ["Brno, Praha, Teplice|Brno, Prague, Teplice|Brno, Prag, Teplice|Brno, Praga, Teplice|Брно, Прага, Теплице",100,180,50,100]]},
+  {k:"si",n:{sq:"🇸🇮 Slloveni & 🇭🇷 Kroaci",en:"🇸🇮 Slovenia & 🇭🇷 Croatia",de:"🇸🇮 Slowenien & 🇭🇷 Kroatien",it:"🇸🇮 Slovenia & 🇭🇷 Croazia",mk:"🇸🇮 Словенија & 🇭🇷 Хрватска"},r:[
+    ["Ljubljana, Zagreb, Koper|Ljubljana, Zagreb, Koper|Ljubljana, Zagreb, Koper|Lubiana, Zagabria, Capodistria|Љубљана, Загреб, Копер",40,80,40,80],
+    ["Monfalcone, Casalto, Gonars, Fratta, Vidor, Ponte, Mestre|Monfalcone, Casalto, Gonars, Fratta, Vidor, Ponte, Mestre|Monfalcone, Casalto, Gonars, Fratta, Vidor, Ponte, Mestre|Monfalcone, Casalto, Gonars, Fratta, Vidor, Ponte, Mestre|Монфалконе, Казалто, Гонарс, Фрата, Видор, Понте, Местре",80,150,60,100]]},
+  {k:"it",n:{sq:"🇮🇹 Itali",en:"🇮🇹 Italy",de:"🇮🇹 Italien",it:"🇮🇹 Italia",mk:"🇮🇹 Италија"},r:[
+    ["Bologna, Forlì, Cesena|Bologna, Forlì, Cesena|Bologna, Forlì, Cesena|Bologna, Forlì, Cesena|Болоња, Форли, Чезена",90,160,60,100],
+    ["Pesaro, Fano, Faenza, Rimini|Pesaro, Fano, Faenza, Rimini|Pesaro, Fano, Faenza, Rimini|Pesaro, Fano, Faenza, Rimini|Пезаро, Фано, Фаенца, Римини",100,180,60,100],
+    ["Ancona, Jesi, Civitanova, Ascoli Piceno, Teramo, L'Aquila|Ancona, Jesi, Civitanova, Ascoli Piceno, Teramo, L'Aquila|Ancona, Jesi, Civitanova, Ascoli Piceno, Teramo, L'Aquila|Ancona, Jesi, Civitanova, Ascoli Piceno, Teramo, L'Aquila|Анкона, Јези, Чивитанова, Асколи Пичено, Терамо, Л'Аквила",110,200,70,120],
+    ["Avezzano, Roma|Avezzano, Rome|Avezzano, Rom|Avezzano, Roma|Авецано, Рим",120,220,70,120],
+    ["Trieste, Portogruaro, Mestre, Treviso, Verona, Padova, Vicenza, Desenzano|Trieste, Portogruaro, Mestre, Treviso, Verona, Padua, Vicenza, Desenzano|Triest, Portogruaro, Mestre, Treviso, Verona, Padua, Vicenza, Desenzano|Trieste, Portogruaro, Mestre, Treviso, Verona, Padova, Vicenza, Desenzano|Трст, Портотруаро, Местре, Тревизо, Верона, Падова, Виченца, Дезенцано",100,180,60,120],
+    ["Brescia, Bergamo, Milano, Novara, Alessandria, Asti, Alba|Brescia, Bergamo, Milan, Novara, Alessandria, Asti, Alba|Brescia, Bergamo, Mailand, Novara, Alessandria, Asti, Alba|Brescia, Bergamo, Milano, Novara, Alessandria, Asti, Alba|Бреша, Бергамо, Милано, Новара, Алесандрија, Асти, Алба",100,180,60,110],
+    ["Firenze|Florence|Florenz|Firenze|Фиренца",100,180,60,110],
+    ["Collepepe, Foligno, Spoleto, Arezzo, Perugia, Terni, Rieti|Collepepe, Foligno, Spoleto, Arezzo, Perugia, Terni, Rieti|Collepepe, Foligno, Spoleto, Arezzo, Perugia, Terni, Rieti|Collepepe, Foligno, Spoleto, Arezzo, Perugia, Terni, Rieti|Колепепе, Фолињо, Сполето, Арецо, Перуџа, Терни, Риети",110,200,70,120],
+    ["Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Siena, Colle Val d'Elsa, Grosseto, Viterbo, Orte|Сиена, Коле Вал д'Елса, Гросето, Витербо, Орте",120,220,70,120]]}
 ];
 
-const S=[
-  ["09:00","Tirana","Shqipëri – Nisja e mëngjesit"],
-  ["21:00","Tirana","Shqipëri – Nisja e darkës"],
-  ["04:00","Elbasan","Shqipëri"],
-  ["05:00","Librazhd","Shqipëri"],
-  ["05:30","Prenjas","Shqipëri"],
-  ["06:00","Strugë","Maqedoni e Veriut"],
-  ["07:00","Kërçovë","Maqedoni e Veriut"],
-  ["08:00","Gostivar","Maqedoni e Veriut"],
-  ["09:00","Tetovë","Maqedoni e Veriut"],
-  ["10:00","Shkup","Maqedoni e Veriut"],
-  ["11:00","Kumanovë","Maqedoni e Veriut"]
-];
+/* Orari – 5 gjuhë */
+const S_DATA = {
+  sq:[["09:00","Tirana","Shqipëri – Nisja e mëngjesit"],["21:00","Tirana","Shqipëri – Nisja e darkës"],["04:00","Elbasan","Shqipëri"],["05:00","Librazhd","Shqipëri"],["05:30","Prenjas","Shqipëri"],["06:00","Strugë","Maqedoni e Veriut"],["07:00","Kërçovë","Maqedoni e Veriut"],["08:00","Gostivar","Maqedoni e Veriut"],["09:00","Tetovë","Maqedoni e Veriut"],["10:00","Shkup","Maqedoni e Veriut"],["11:00","Kumanovë","Maqedoni e Veriut"]],
+  en:[["09:00","Tirana","Albania – Morning departure"],["21:00","Tirana","Albania – Evening departure"],["04:00","Elbasan","Albania"],["05:00","Librazhd","Albania"],["05:30","Prenjas","Albania"],["06:00","Struga","North Macedonia"],["07:00","Kičevo","North Macedonia"],["08:00","Gostivar","North Macedonia"],["09:00","Tetovo","North Macedonia"],["10:00","Skopje","North Macedonia"],["11:00","Kumanovo","North Macedonia"]],
+  de:[["09:00","Tirana","Albanien – Morgenabfahrt"],["21:00","Tirana","Albanien – Abendabfahrt"],["04:00","Elbasan","Albanien"],["05:00","Librazhd","Albanien"],["05:30","Prenjas","Albanien"],["06:00","Struga","Nordmazedonien"],["07:00","Kičevo","Nordmazedonien"],["08:00","Gostivar","Nordmazedonien"],["09:00","Tetovo","Nordmazedonien"],["10:00","Skopje","Nordmazedonien"],["11:00","Kumanovo","Nordmazedonien"]],
+  it:[["09:00","Tirana","Albania – Partenza mattutina"],["21:00","Tirana","Albania – Partenza serale"],["04:00","Elbasan","Albania"],["05:00","Librazhd","Albania"],["05:30","Prenjas","Albania"],["06:00","Struga","Macedonia del Nord"],["07:00","Kičevo","Macedonia del Nord"],["08:00","Gostivar","Macedonia del Nord"],["09:00","Tetovo","Macedonia del Nord"],["10:00","Skopje","Macedonia del Nord"],["11:00","Kumanovo","Macedonia del Nord"]],
+  mk:[["09:00","Тирана","Албанија – Утринско тргнување"],["21:00","Тирана","Албанија – Вечерно тргнување"],["04:00","Елбасан","Албанија"],["05:00","Либражд","Албанија"],["05:30","Прењас","Албанија"],["06:00","Струга","Северна Македонија"],["07:00","Кичево","Северна Македонија"],["08:00","Гостивар","Северна Македонија"],["09:00","Тетово","Северна Македонија"],["10:00","Скопје","Северна Македонија"],["11:00","Куманово","Северна Македонија"]]
+};
 
 const FROM={mk:15,de:100,cz:100,si:40,it:90};
 const FL={mk:"🇲🇰",de:"🇩🇪",cz:"🇨🇿",si:"🇸🇮",it:"🇮🇹"};
 const DS={
-  mk:"Strugë, Kërçovë, Gostivar, Tetovë, Shkup",
-  de:"München, Berlin, Hamburg, Frankfurt dhe qytete të tjera",
-  cz:"Praha, Brno, Teplice",
-  si:"Ljubljana, Zagreb, Koper dhe qytete të tjera",
-  it:"Roma, Milano, Firenze, Verona dhe qytete të tjera"
+  sq:{mk:"Strugë, Kërçovë, Gostivar, Tetovë, Shkup",de:"München, Berlin, Hamburg, Frankfurt dhe qytete të tjera",cz:"Praha, Brno, Teplice",si:"Ljubljana, Zagreb, Koper dhe qytete të tjera",it:"Roma, Milano, Firenze, Verona dhe qytete të tjera"},
+  en:{mk:"Struga, Kičevo, Gostivar, Tetovo, Skopje",de:"Munich, Berlin, Hamburg, Frankfurt and other cities",cz:"Prague, Brno, Teplice",si:"Ljubljana, Zagreb, Koper and other cities",it:"Rome, Milan, Florence, Verona and other cities"},
+  de:{mk:"Struga, Kičevo, Gostivar, Tetovo, Skopje",de:"München, Berlin, Hamburg, Frankfurt und weitere Städte",cz:"Prag, Brno, Teplice",si:"Ljubljana, Zagreb, Koper und weitere Städte",it:"Rom, Mailand, Florenz, Verona und weitere Städte"},
+  it:{mk:"Struga, Kičevo, Gostivar, Tetovo, Skopje",de:"Monaco, Berlino, Amburgo, Francoforte e altre città",cz:"Praga, Brno, Teplice",si:"Lubiana, Zagabria, Capodistria e altre città",it:"Roma, Milano, Firenze, Verona e altre città"},
+  mk:{mk:"Струга, Кичево, Гостивар, Тетово, Скопје",de:"Минхен, Берлин, Хамбург, Франкфурт и други градови",cz:"Прага, Брно, Теплице",si:"Љубљана, Загреб, Копер и други градови",it:"Рим, Милано, Фиренца, Верона и други градови"}
+};
+
+const W_DATA = {
+  sq:["Hën","Mar","Mër","Enj","Pre","Sht","Die"],
+  en:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+  de:["Mo","Di","Mi","Do","Fr","Sa","So"],
+  it:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
+  mk:["Пон","Вто","Сре","Чет","Пет","Саб","Нед"]
+};
+
+const DY_DATA = {
+  sq:[["Maqedoni e Veriut","Çdo ditë (09:00 & 21:00)",[0,1,2,3,4,5,6]],["Gjermani","Mar, Mër, Pre, Sht",[1,2,4,5]],["Çeki","Nisje çdo ditë",[0,1,2,3,4,5,6]],["Slloveni & Kroaci","Çdo ditë sekondar",[0,1,2,3,4,5,6]],["Slloveni (Monfalcone, Mestre)","Mër dhe Sht",[2,5]],["Itali","Mër dhe Sht (09:00)",[2,5]]],
+  en:[["North Macedonia","Every day (09:00 & 21:00)",[0,1,2,3,4,5,6]],["Germany","Tue, Wed, Fri, Sat",[1,2,4,5]],["Czechia","Departure every day",[0,1,2,3,4,5,6]],["Slovenia & Croatia","Every other day",[0,1,2,3,4,5,6]],["Slovenia (Monfalcone, Mestre)","Wed and Sat",[2,5]],["Italy","Wed and Sat (09:00)",[2,5]]],
+  de:[["Nordmazedonien","Jeden Tag (09:00 & 21:00)",[0,1,2,3,4,5,6]],["Deutschland","Di, Mi, Fr, Sa",[1,2,4,5]],["Tschechien","Abfahrt jeden Tag",[0,1,2,3,4,5,6]],["Slowenien & Kroatien","Jeden zweiten Tag",[0,1,2,3,4,5,6]],["Slowenien (Monfalcone, Mestre)","Mi und Sa",[2,5]],["Italien","Mi und Sa (09:00)",[2,5]]],
+  it:[["Macedonia del Nord","Ogni giorno (09:00 & 21:00)",[0,1,2,3,4,5,6]],["Germania","Mar, Mer, Ven, Sab",[1,2,4,5]],["Repubblica Ceca","Partenza ogni giorno",[0,1,2,3,4,5,6]],["Slovenia & Croazia","Ogni due giorni",[0,1,2,3,4,5,6]],["Slovenia (Monfalcone, Mestre)","Mer e Sab",[2,5]],["Italia","Mer e Sab (09:00)",[2,5]]],
+  mk:[["Северна Македонија","Секој ден (09:00 & 21:00)",[0,1,2,3,4,5,6]],["Германија","Вто, Сре, Пет, Саб",[1,2,4,5]],["Чешка","Тргнување секој ден",[0,1,2,3,4,5,6]],["Словенија & Хрватска","Секој втор ден",[0,1,2,3,4,5,6]],["Словенија (Monfalcone, Mestre)","Сре и Саб",[2,5]],["Италија","Сре и Саб (09:00)",[2,5]]]
 };
 
 const $=id=>document.getElementById(id);
 
 /* ============================================================
-   THEME TOGGLE – LIGHT / DARK
+   I18N – FJALORI I PLOTË NË 5 GJUHË
+   ============================================================ */
+const I18N = {
+  sq:{
+    "preloader.text":"Duke u nisur nga Tirana",
+    "page.title":"Arens Travel – Bileta autobusi nga Tirana për Maqedoni, Gjermani, Itali, Çeki dhe më shumë",
+    "nav.contact":"Kontakt",
+    "hero.h1":"Nga <em>Tirana</em> deri në Evropë, me autobus.",
+    "hero.lead":"Linja të rregullta nga Tirana drejt Maqedonisë së Veriut, Gjermanisë, Çekisë, Sllovenisë, Kroacisë dhe Italisë. Magjia e udhëtimit.",
+    "hero.partner":"partner zyrtar",
+    "ticket.title":"Bileta jote","ticket.sub":"Çmim orientues",
+    "calc.title":"Llogarit biletën","calc.from":"Nisja","calc.fromCity":"Tirana","calc.fixed":"FIKSE",
+    "calc.dest":"Destinacioni","calc.type":"Lloji i biletës","calc.ow":"Vetëm vajtje (OW)","calc.rt":"Vajtje-ardhje (RT)",
+    "calc.adults":"Të rritur","calc.kids":"Fëmijë (deri 10 vjeç)","calc.total":"Total",
+    "calc.book":"Rezervo në WhatsApp","calc.note":"Datën dhe çmimin final i konfirmojmë me ty.",
+    "sched.title":"Orari i nisjes","sched.sub":"Të gjitha nisjet bëhen nga Tirana. Autobusi kalon nga këto qytete gjatë rrugës.",
+    "sched.time":"ORA","sched.city":"QYTETI",
+    "dest.title":"Ku udhëtojmë","dest.sub":"Zgjidh shtetin për të parë çmimet e plota. Nisja: Tiranë.",
+    "price.title":"Çmimet","price.sub":"Në euro. Kërko qytetin ose filtro sipas shtetit.",
+    "price.search":"Kërko qytetin, p.sh. Milano",
+    "price.thDest":"Destinacioni","price.thOW":"Vajtje (OW)","price.thRT":"Vajtje-ardhje (RT)",
+    "price.thKidOW":"Fëmijë OW","price.thKidRT":"Fëmijë RT",
+    "price.none":"Nuk u gjet asnjë qytet. Na shkruaj dhe të ndihmojmë.",
+    "price.note":"Fëmijët deri në 10 vjeç paguajnë çmim të reduktuar. Çmimet e Italisë janë përditësimi më i fundit.",
+    "when.title":"Kur niset autobusi","when.sub":"Pika e kuqe do të thotë se ka nisje atë ditë.",
+    "contact.title":"Rezervo vendin tënd sot.","contact.sub":"Na telefono ose na shkruaj në WhatsApp. Zyra jonë ndodhet në Strugë, Maqedoni e Veriut.",
+    "footer.copy":"© Arens Travel","footer.tag":"Magjia e Udhëtimit · Partner zyrtar HAK BUS",
+    "sched.ok":"Nisje","lbl.from":"nga","lbl.trip":"vajtje","lbl.all":"Të gjitha"
+  },
+  en:{
+    "preloader.text":"Departing from Tirana",
+    "page.title":"Arens Travel – Bus tickets from Tirana to Macedonia, Germany, Italy, Czechia and more",
+    "nav.contact":"Contact",
+    "hero.h1":"From <em>Tirana</em> to Europe, by bus.",
+    "hero.lead":"Regular lines from Tirana to North Macedonia, Germany, Czechia, Slovenia, Croatia and Italy. The magic of travel.",
+    "hero.partner":"official partner",
+    "ticket.title":"Your ticket","ticket.sub":"Estimated price",
+    "calc.title":"Calculate your ticket","calc.from":"Departure","calc.fromCity":"Tirana","calc.fixed":"FIXED",
+    "calc.dest":"Destination","calc.type":"Ticket type","calc.ow":"One way (OW)","calc.rt":"Round trip (RT)",
+    "calc.adults":"Adults","calc.kids":"Children (up to 10)","calc.total":"Total",
+    "calc.book":"Book on WhatsApp","calc.note":"We will confirm the date and final price with you.",
+    "sched.title":"Departure schedule","sched.sub":"All departures are from Tirana. The bus passes through these cities on the way.",
+    "sched.time":"TIME","sched.city":"CITY",
+    "dest.title":"Where we travel","dest.sub":"Choose a country to see full prices. Departure: Tirana.",
+    "price.title":"Prices","price.sub":"In euros. Search for a city or filter by country.",
+    "price.search":"Search for a city, e.g. Milan",
+    "price.thDest":"Destination","price.thOW":"One way (OW)","price.thRT":"Round trip (RT)",
+    "price.thKidOW":"Child OW","price.thKidRT":"Child RT",
+    "price.none":"No city found. Contact us and we'll help.",
+    "price.note":"Children up to 10 years pay a reduced price. Italy prices are the latest update.",
+    "when.title":"When the bus departs","when.sub":"A red dot means there is a departure that day.",
+    "contact.title":"Book your seat today.","contact.sub":"Call us or write on WhatsApp. Our office is in Struga, North Macedonia.",
+    "footer.copy":"© Arens Travel","footer.tag":"The Magic of Travel · Official HAK BUS partner",
+    "sched.ok":"Departure","lbl.from":"from","lbl.trip":"one way","lbl.all":"All"
+  },
+  de:{
+    "preloader.text":"Abfahrt von Tirana",
+    "page.title":"Arens Travel – Busfahrkarten von Tirana nach Mazedonien, Deutschland, Italien, Tschechien und mehr",
+    "nav.contact":"Kontakt",
+    "hero.h1":"Von <em>Tirana</em> nach Europa, mit dem Bus.",
+    "hero.lead":"Regelmäßige Linien von Tirana nach Nordmazedonien, Deutschland, Tschechien, Slowenien, Kroatien und Italien. Die Magie des Reisens.",
+    "hero.partner":"offizieller Partner",
+    "ticket.title":"Ihr Ticket","ticket.sub":"Richtpreis",
+    "calc.title":"Ticket berechnen","calc.from":"Abfahrt","calc.fromCity":"Tirana","calc.fixed":"FEST",
+    "calc.dest":"Ziel","calc.type":"Ticketart","calc.ow":"Einfache Fahrt (OW)","calc.rt":"Hin- und Rückfahrt (RT)",
+    "calc.adults":"Erwachsene","calc.kids":"Kinder (bis 10 Jahre)","calc.total":"Gesamt",
+    "calc.book":"Über WhatsApp buchen","calc.note":"Wir bestätigen Datum und Endpreis mit Ihnen.",
+    "sched.title":"Abfahrtsplan","sched.sub":"Alle Abfahrten erfolgen von Tirana. Der Bus hält unterwegs in diesen Städten.",
+    "sched.time":"ZEIT","sched.city":"STADT",
+    "dest.title":"Wohin wir reisen","dest.sub":"Wählen Sie ein Land, um alle Preise zu sehen. Abfahrt: Tirana.",
+    "price.title":"Preise","price.sub":"In Euro. Suchen Sie eine Stadt oder filtern Sie nach Land.",
+    "price.search":"Stadt suchen, z. B. Mailand",
+    "price.thDest":"Ziel","price.thOW":"Einfach (OW)","price.thRT":"Hin & Zurück (RT)",
+    "price.thKidOW":"Kind OW","price.thKidRT":"Kind RT",
+    "price.none":"Keine Stadt gefunden. Kontaktieren Sie uns.",
+    "price.note":"Kinder bis 10 Jahre zahlen einen reduzierten Preis. Italien-Preise sind das neueste Update.",
+    "when.title":"Wann der Bus fährt","when.sub":"Ein roter Punkt bedeutet, dass an diesem Tag eine Abfahrt stattfindet.",
+    "contact.title":"Buchen Sie noch heute Ihren Platz.","contact.sub":"Rufen Sie uns an oder schreiben Sie auf WhatsApp. Unser Büro ist in Struga, Nordmazedonien.",
+    "footer.copy":"© Arens Travel","footer.tag":"Die Magie des Reisens · Offizieller HAK BUS Partner",
+    "sched.ok":"Abfahrt","lbl.from":"ab","lbl.trip":"einfach","lbl.all":"Alle"
+  },
+  it:{
+    "preloader.text":"In partenza da Tirana",
+    "page.title":"Arens Travel – Biglietti bus da Tirana per Macedonia, Germania, Italia, Repubblica Ceca e altro",
+    "nav.contact":"Contatti",
+    "hero.h1":"Da <em>Tirana</em> all'Europa, in autobus.",
+    "hero.lead":"Linee regolari da Tirana verso la Macedonia del Nord, Germania, Repubblica Ceca, Slovenia, Croazia e Italia. La magia del viaggio.",
+    "hero.partner":"partner ufficiale",
+    "ticket.title":"Il tuo biglietto","ticket.sub":"Prezzo indicativo",
+    "calc.title":"Calcola il biglietto","calc.from":"Partenza","calc.fromCity":"Tirana","calc.fixed":"FISSO",
+    "calc.dest":"Destinazione","calc.type":"Tipo di biglietto","calc.ow":"Solo andata (OW)","calc.rt":"Andata e ritorno (RT)",
+    "calc.adults":"Adulti","calc.kids":"Bambini (fino a 10 anni)","calc.total":"Totale",
+    "calc.book":"Prenota su WhatsApp","calc.note":"Confermeremo la data e il prezzo finale con te.",
+    "sched.title":"Orario di partenza","sched.sub":"Tutte le partenze sono da Tirana. L'autobus passa per queste città lungo il percorso.",
+    "sched.time":"ORA","sched.city":"CITTÀ",
+    "dest.title":"Dove viaggiamo","dest.sub":"Scegli un paese per vedere tutti i prezzi. Partenza: Tirana.",
+    "price.title":"Prezzi","price.sub":"In euro. Cerca una città o filtra per paese.",
+    "price.search":"Cerca una città, es. Milano",
+    "price.thDest":"Destinazione","price.thOW":"Solo andata (OW)","price.thRT":"Andata e ritorno (RT)",
+    "price.thKidOW":"Bambino OW","price.thKidRT":"Bambino RT",
+    "price.none":"Nessuna città trovata. Contattaci e ti aiuteremo.",
+    "price.note":"I bambini fino a 10 anni pagano un prezzo ridotto. I prezzi dell'Italia sono l'ultimo aggiornamento.",
+    "when.title":"Quando parte l'autobus","when.sub":"Un punto rosso significa che c'è una partenza quel giorno.",
+    "contact.title":"Prenota il tuo posto oggi.","contact.sub":"Chiamaci o scrivici su WhatsApp. Il nostro ufficio è a Struga, Macedonia del Nord.",
+    "footer.copy":"© Arens Travel","footer.tag":"La magia del viaggio · Partner ufficiale HAK BUS",
+    "sched.ok":"Partenza","lbl.from":"da","lbl.trip":"solo andata","lbl.all":"Tutte"
+  },
+  mk:{
+    "preloader.text":"Тргнување од Тирана",
+    "page.title":"Arens Travel – Автобуски билети од Тирана за Македонија, Германија, Италија, Чешка и повеќе",
+    "nav.contact":"Контакт",
+    "hero.h1":"Од <em>Тирана</em> до Европа, со автобус.",
+    "hero.lead":"Редовни линии од Тирана кон Северна Македонија, Германија, Чешка, Словенија, Хрватска и Италија. Магијата на патувањето.",
+    "hero.partner":"официјален партнер",
+    "ticket.title":"Вашиот билет","ticket.sub":"Проценета цена",
+    "calc.title":"Пресметајте го билетот","calc.from":"Поаѓање","calc.fromCity":"Тирана","calc.fixed":"ФИКСНО",
+    "calc.dest":"Дестинација","calc.type":"Вид на билет","calc.ow":"Еднонасочен (OW)","calc.rt":"Повратен (RT)",
+    "calc.adults":"Возрасни","calc.kids":"Деца (до 10 години)","calc.total":"Вкупно",
+    "calc.book":"Резервирај на WhatsApp","calc.note":"Датумот и конечната цена ќе ги потврдиме со вас.",
+    "sched.title":"Распоред на поаѓање","sched.sub":"Сите поаѓања се од Тирана. Автобусот застанува во овие градови на патот.",
+    "sched.time":"ЧАС","sched.city":"ГРАД",
+    "dest.title":"Каде патуваме","dest.sub":"Изберете земја за да ги видите сите цени. Поаѓање: Тирана.",
+    "price.title":"Цени","price.sub":"Во евра. Пребарајте град или филтрирајте по земја.",
+    "price.search":"Пребарајте град, на пр. Милано",
+    "price.thDest":"Дестинација","price.thOW":"Еднонасочен (OW)","price.thRT":"Повратен (RT)",
+    "price.thKidOW":"Дете OW","price.thKidRT":"Дете RT",
+    "price.none":"Не е пронајден град. Контактирајте нè и ќе помогнеме.",
+    "price.note":"Децата до 10 години плаќаат намалена цена. Цените за Италија се најново ажурирање.",
+    "when.title":"Кога тргнува автобусот","when.sub":"Црвена точка значи дека има поаѓање тој ден.",
+    "contact.title":"Резервирајте го вашето место денес.","contact.sub":"Јавете се или пишете на WhatsApp. Нашата канцеларија е во Струга, Северна Македонија.",
+    "footer.copy":"© Arens Travel","footer.tag":"Магијата на патувањето · Официјален партнер на HAK BUS",
+    "sched.ok":"Поаѓање","lbl.from":"од","lbl.trip":"еднонасочен","lbl.all":"Сите"
+  }
+};
+
+const LANG_FLAGS = { sq:"🇦🇱", en:"🇬🇧", de:"🇩🇪", it:"🇮🇹", mk:"🇲🇰" };
+const LANG_CODES = { sq:"SQ", en:"EN", de:"DE", it:"IT", mk:"MK" };
+let currentLang = "sq";
+
+/* ============================================================
+   RENDER FUNKSIONET
+   ============================================================ */
+function getCity(r, lang){
+  const parts = r[0].split("|");
+  const idx = {sq:0,en:1,de:2,it:3,mk:4}[lang] ?? 0;
+  return parts[idx] || parts[0];
+}
+
+function renderSched(){
+  const data = S_DATA[currentLang] || S_DATA.sq;
+  const t = I18N[currentLang] || I18N.sq;
+  $("sched").innerHTML = data.map(s =>
+    `<div class="br"><b>${s[0]}</b><span class="c">${s[1]}<small>${s[2]}</small></span><span class="ok">${t["sched.ok"]}</span></div>`
+  ).join("");
+}
+
+function renderDestList(){
+  const t = I18N[currentLang] || I18N.sq;
+  const dsMap = DS[currentLang] || DS.sq;
+  $("dl").innerHTML = G.map(g => {
+    const name = (g.n[currentLang] || g.n.sq).replace(/^[\p{Emoji}\s]+/u, "");
+    return `<a class="dr" href="#cmimet" data-go="${g.k}">
+       <span class="fl">${FL[g.k]}</span>
+       <div><h3>${name}</h3><p>${dsMap[g.k]}</p></div>
+       <div class="pr">${t["lbl.from"]}<b>${FROM[g.k]}€</b>${t["lbl.trip"]}</div>
+     </a>`;
+  }).join("");
+  document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", () => {
+    cur = a.dataset.go; tabs(); draw();
+  }));
+}
+
+function renderWeek(){
+  const W = W_DATA[currentLang] || W_DATA.sq;
+  const DY = DY_DATA[currentLang] || DY_DATA.sq;
+  $("wk").innerHTML =
+    '<div class="wr h"><span></span>' + W.map(d => `<span style="text-align:center">${d}</span>`).join("") + "</div>" +
+    DY.map(r => `<div class="wr"><span class="n">${r[0]}<small>${r[1]}</small></span>` +
+      W.map((_, i) => `<span class="dot${r[2].includes(i) ? " on" : ""}" title="${W[i]}"></span>`).join("") +
+    "</div>").join("");
+}
+
+function renderCityDropdown(){
+  const CP_new = {};
+  $("cd").innerHTML = G.map(g =>
+    `<optgroup label="${g.n[currentLang] || g.n.sq}">` +
+    g.r.flatMap(r => {
+      const cities = r[0].split("|");
+      const idx = {sq:0,en:1,de:2,it:3,mk:4}[currentLang] ?? 0;
+      const list = (cities[idx] || cities[0]).split(", ");
+      return list.map(c => {
+        CP_new[c] = r;
+        return `<option>${c}</option>`;
+      });
+    }).join("") +
+    "</optgroup>"
+  ).join("");
+  Object.keys(CP).forEach(k => delete CP[k]);
+  Object.assign(CP, CP_new);
+}
+
+/* ============================================================
+   APPLY LANG
+   ============================================================ */
+function applyLang(lang){
+  if (!I18N[lang]) lang = "sq";
+  currentLang = lang;
+  const dict = I18N[lang];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const key = el.getAttribute("data-i18n-html");
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (dict[key] !== undefined) el.placeholder = dict[key];
+  });
+
+  if (dict["page.title"]) document.title = dict["page.title"];
+  document.documentElement.setAttribute("lang", lang);
+
+  const flagEl = document.getElementById("langCurrentFlag");
+  const codeEl = document.getElementById("langCurrentCode");
+  if (flagEl) flagEl.textContent = LANG_FLAGS[lang];
+  if (codeEl) codeEl.textContent = LANG_CODES[lang];
+
+  document.querySelectorAll(".lang-opt").forEach(opt => {
+    opt.setAttribute("aria-current", opt.dataset.lang === lang ? "true" : "false");
+  });
+
+  renderSched();
+  renderDestList();
+  renderWeek();
+  renderCityDropdown();
+  tabs();
+  draw();
+  calc();
+  initSchedObserver();
+}
+
+/* ============================================================
+   INIT LANG
+   ============================================================ */
+(function initLang(){
+  const saved = localStorage.getItem("arens-lang");
+  const browserLang = (navigator.language || "sq").slice(0, 2).toLowerCase();
+  const initial = saved && I18N[saved] ? saved : (I18N[browserLang] ? browserLang : "sq");
+
+  const toggle = document.getElementById("langToggle");
+  const menu = document.getElementById("langMenu");
+
+  if (toggle && menu){
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
+    });
+    menu.querySelectorAll(".lang-opt").forEach(opt => {
+      opt.addEventListener("click", () => {
+        const lang = opt.dataset.lang;
+        applyLang(lang);
+        localStorage.setItem("arens-lang", lang);
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)){
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape"){
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+
+  setTimeout(() => applyLang(initial), 0);
+})();
+
+/* ============================================================
+   THEME TOGGLE
    ============================================================ */
 (function initTheme(){
   const saved = localStorage.getItem("arens-theme");
   const root = document.documentElement;
-
-  if (saved === "light" || saved === "dark"){
-    root.setAttribute("data-theme", saved);
-  }
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
 
   const btn = document.getElementById("themeToggle");
   if (!btn) return;
-
   btn.addEventListener("click", () => {
     const current = root.getAttribute("data-theme");
     let next;
-
-    if (current === "dark"){
-      next = "light";
-    } else if (current === "light"){
-      next = "dark";
-    } else {
+    if (current === "dark") next = "light";
+    else if (current === "light") next = "dark";
+    else {
       const systemDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
       next = systemDark ? "light" : "dark";
     }
-
     root.setAttribute("data-theme", next);
     localStorage.setItem("arens-theme", next);
   });
@@ -992,122 +1312,81 @@ const $=id=>document.getElementById(id);
    ============================================================ */
 const PRELOADER_MIN = 1800;
 const startTime = Date.now();
-
 function hidePreloader(){
   const elapsed = Date.now() - startTime;
   const wait = Math.max(0, PRELOADER_MIN - elapsed);
   setTimeout(() => $("preloader").classList.add("hide"), wait);
 }
-
 if (document.readyState === "complete") hidePreloader();
 else window.addEventListener("load", hidePreloader);
 setTimeout(() => $("preloader").classList.add("hide"), 4000);
 
 /* ============================================================
-   ORARI
+   ORARI – OBSERVER
    ============================================================ */
-$("sched").innerHTML=S.map(s=>
-  `<div class="br"><b>${s[0]}</b><span class="c">${s[1]}<small>${s[2]}</small></span><span class="ok">Nisje</span></div>`
-).join("");
-
-const schedObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.br').forEach((row, i) => {
-        setTimeout(() => row.classList.add('reveal'), i * 80);
-      });
-      schedObserver.disconnect();
-    }
-  });
-}, { threshold: 0.15 });
-schedObserver.observe($("sched"));
+let schedObserverInstance = null;
+function initSchedObserver(){
+  if (schedObserverInstance) schedObserverInstance.disconnect();
+  schedObserverInstance = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        document.querySelectorAll(".br").forEach((row, i) => {
+          setTimeout(() => row.classList.add("reveal"), i * 80);
+        });
+        schedObserverInstance.disconnect();
+      }
+    });
+  }, { threshold: 0.15 });
+  schedObserverInstance.observe($("sched"));
+}
 
 /* ============================================================
    LIVE CLOCK
    ============================================================ */
 function updateClock(){
   const now = new Date();
-  const t = now.toLocaleTimeString('sq-AL',{hour:'2-digit',minute:'2-digit'});
+  const t = now.toLocaleTimeString("sq-AL", {hour:"2-digit",minute:"2-digit"});
   $("liveClock").textContent = "🕐 " + t;
 }
 setInterval(updateClock, 1000);
 updateClock();
 
 /* ============================================================
-   DESTINACIONET
+   ÇMIMET – TABS + TABLE
    ============================================================ */
-$("dl").innerHTML=G.map(g=>
-  `<a class="dr" href="#cmimet" data-go="${g.k}">
-     <span class="fl">${FL[g.k]}</span>
-     <div><h3>${g.n.replace(/^[\p{Emoji}\s]+/u,"")}</h3><p>${DS[g.k]}</p></div>
-     <div class="pr">nga<b>${FROM[g.k]}€</b>vajtje</div>
-   </a>`
-).join("");
-
-/* ============================================================
-   KALENDARI JAVOR
-   ============================================================ */
-const W=["Hën","Mar","Mër","Enj","Pre","Sht","Die"];
-const DY=[
-  ["Maqedoni e Veriut","Çdo ditë (09:00 & 21:00)",[0,1,2,3,4,5,6]],
-  ["Gjermani","Mar, Mër, Pre, Sht",[1,2,4,5]],
-  ["Çeki","Nisje çdo ditë",[0,1,2,3,4,5,6]],
-  ["Slloveni & Kroaci","Çdo ditë sekondar",[0,1,2,3,4,5,6]],
-  ["Slloveni (Monfalcone, Mestre)","Mër dhe Sht",[2,5]],
-  ["Itali","Mër dhe Sht (09:00)",[2,5]]
-];
-$("wk").innerHTML=
-  '<div class="wr h"><span></span>'+W.map(d=>`<span style="text-align:center">${d}</span>`).join("")+"</div>"+
-  DY.map(r=>`<div class="wr"><span class="n">${r[0]}<small>${r[1]}</small></span>`+
-    W.map((_,i)=>`<span class="dot${r[2].includes(i)?" on":""}" title="${W[i]}"></span>`).join("")+
-  "</div>").join("");
-
-/* ============================================================
-   ÇMIMET
-   ============================================================ */
-let cur="all";
-const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ë/g,"e").replace(/ç/g,"c");
+let cur = "all";
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ë/g, "e").replace(/ç/g, "c");
 
 function tabs(){
-  $("tabs").innerHTML=[{k:"all",n:"Të gjitha"},...G]
-    .map(g=>`<button class="tab" data-k="${g.k}" aria-pressed="${g.k===cur}">${g.n}</button>`).join("");
+  const t = I18N[currentLang] || I18N.sq;
+  $("tabs").innerHTML = [{k:"all", n:t["lbl.all"]}, ...G.map(g => ({k:g.k, n:g.n[currentLang] || g.n.sq}))]
+    .map(g => `<button class="tab" data-k="${g.k}" aria-pressed="${g.k === cur}">${g.n}</button>`).join("");
 }
-
 function draw(){
-  const q=norm($("q").value.trim());
-  let h="";
-  G.forEach(g=>{
-    if(cur!=="all"&&g.k!==cur) return;
-    g.r.forEach(r=>{
-      if(q&&!norm(r[0]).includes(q)) return;
-      h+=`<tr><td class="cs">${r[0]}</td>${r.slice(1).map(v=>`<td class="p">${v}€</td>`).join("")}</tr>`;
+  const q = norm($("q").value.trim());
+  let h = "";
+  G.forEach(g => {
+    if (cur !== "all" && g.k !== cur) return;
+    g.r.forEach(r => {
+      const cityName = getCity(r, currentLang);
+      if (q && !norm(cityName).includes(q)) return;
+      h += `<tr><td class="cs">${cityName}</td>${r.slice(1).map(v => `<td class="p">${v}€</td>`).join("")}</tr>`;
     });
   });
-  $("rows").innerHTML=h;
-  $("none").hidden=!!h;
+  $("rows").innerHTML = h;
+  $("none").hidden = !!h;
 }
-
-$("tabs").addEventListener("click",e=>{
-  const b=e.target.closest("button");
-  if(!b) return;
-  cur=b.dataset.k; tabs(); draw();
+$("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  cur = b.dataset.k; tabs(); draw();
 });
-$("q").addEventListener("input",draw);
-document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>{
-  cur=a.dataset.go; tabs(); draw();
-}));
-tabs(); draw();
+$("q").addEventListener("input", draw);
 
 /* ============================================================
    LLOGARITËSI
    ============================================================ */
-const CP={};
-$("cd").innerHTML=G.map(g=>
-  `<optgroup label="${g.n}">`+
-  g.r.flatMap(r=>r[0].split(", ").map(c=>{CP[c]=r;return `<option>${c}</option>`;})).join("")+
-  "</optgroup>"
-).join("");
-
+const CP = {};
 let currentTotal = 0;
 
 function animateNumber(el, start, end, duration = 600){
@@ -1124,7 +1403,7 @@ function animateNumber(el, start, end, duration = 600){
 
 function calc(){
   const r = CP[$("cd").value];
-  if(!r) return;
+  if (!r) return;
   const rt = $("ct").value === "rt";
   const a = Math.max(0, +$("ca").value || 0);
   const c = Math.max(0, +$("cc").value || 0);
@@ -1133,34 +1412,37 @@ function calc(){
   const el = $("cT");
   animateNumber(el, currentTotal, t, 550);
   currentTotal = t;
-
   el.classList.remove("bump");
   void el.offsetWidth;
   el.classList.add("bump");
 
-  $("cw").href = "https://wa.me/355693799888?text=" + encodeURIComponent(
-    `Përshëndetje, dua të rezervoj bilete nga Tirana për ${$("cd").value} (${rt?"vajtje-ardhje (RT)":"vetëm vajtje (OW)"}), ${a} të rritur, ${c} fëmijë. Totali: ${t}€.`
-  );
+  const msg = {
+    sq:`Përshëndetje, dua të rezervoj bilete nga Tirana për ${$("cd").value} (${rt?"vajtje-ardhje (RT)":"vetëm vajtje (OW)"}), ${a} të rritur, ${c} fëmijë. Totali: ${t}€.`,
+    en:`Hello, I want to book tickets from Tirana to ${$("cd").value} (${rt?"round trip (RT)":"one way (OW)"}), ${a} adults, ${c} children. Total: ${t}€.`,
+    de:`Hallo, ich möchte Tickets von Tirana nach ${$("cd").value} buchen (${rt?"Hin- und Rückfahrt (RT)":"einfache Fahrt (OW)"}), ${a} Erwachsene, ${c} Kinder. Gesamt: ${t}€.`,
+    it:`Ciao, vorrei prenotare biglietti da Tirana a ${$("cd").value} (${rt?"andata e ritorno (RT)":"solo andata (OW)"}), ${a} adulti, ${c} bambini. Totale: ${t}€.`,
+    mk:`Здраво, сакам да резервирам билети од Тирана до ${$("cd").value} (${rt?"повратен (RT)":"еднонасочен (OW)"}), ${a} возрасни, ${c} деца. Вкупно: ${t}€.`
+  }[currentLang] || `Hello, I want to book tickets from Tirana to ${$("cd").value}. Total: ${t}€.`;
+
+  $("cw").href = "https://wa.me/355693799888?text=" + encodeURIComponent(msg);
 }
 
-["cd","ct","ca","cc"].forEach(i=>{
-  $(i).addEventListener("input",calc);
-  $(i).addEventListener("change",calc);
+["cd","ct","ca","cc"].forEach(i => {
+  $(i).addEventListener("input", calc);
+  $(i).addEventListener("change", calc);
 });
-calc();
 
 /* ============================================================
    REVEAL ON SCROLL
    ============================================================ */
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting){
       entry.target.classList.add("visible");
       sectionObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.08 });
-
 document.querySelectorAll("section").forEach(s => sectionObserver.observe(s));
 
 /* ============================================================
@@ -1169,7 +1451,7 @@ document.querySelectorAll("section").forEach(s => sectionObserver.observe(s));
 const backTop = $("backTop");
 let ticking = false;
 window.addEventListener("scroll", () => {
-  if (!ticking) {
+  if (!ticking){
     requestAnimationFrame(() => {
       if (window.scrollY > 400) backTop.classList.add("show");
       else backTop.classList.remove("show");
@@ -1178,13 +1460,10 @@ window.addEventListener("scroll", () => {
     ticking = true;
   }
 }, { passive: true });
-
-backTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
 /* ============================================================
-   MAGNETIC BUTTON (vetëm desktop)
+   MAGNETIC BUTTON
    ============================================================ */
 if (window.matchMedia("(hover: hover) and (pointer: fine)").matches){
   document.querySelectorAll(".btn").forEach(btn => {
@@ -1194,14 +1473,12 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches){
       const y = e.clientY - rect.top - rect.height / 2;
       btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
     });
-    btn.addEventListener("mouseleave", () => {
-      btn.style.transform = "translate(0, 0)";
-    });
+    btn.addEventListener("mouseleave", () => btn.style.transform = "translate(0, 0)");
   });
 }
 
 /* ============================================================
-   PARANDAL ZOOM NË DOUBLE-TAP (iOS)
+   PARANDAL ZOOM NË DOUBLE-TAP
    ============================================================ */
 let lastTouch = 0;
 document.addEventListener("touchend", (e) => {
